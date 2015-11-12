@@ -1,0 +1,12 @@
+****** THE APP... ******
+    Allows users to create units of study containing lesson plans.
+    Lesson plans and units can be aligned to common core and state standards.
+    Lesson plans and units will be stored in a database and accessible from everywhere.
+    The design will be responsive, and usable on different device screens.
+
+****** THE USER... ******
+    User logs in
+    User creates Course
+    User creates Unit of Study and adds to Course(es)
+    User creates Lesson Plan and adds to Unit
+    User can login and look up Course/Unit/Lesson for future reference
