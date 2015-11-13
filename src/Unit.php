@@ -79,5 +79,29 @@
             return $units;
         }
 
+        //Edit unit info
+        function updateUnit($new_title, $new_description)
+        {
+            $GLOBALS['DB']->exec("UPDATE units SET
+                    title = '{$new_title}',
+                    description = '{$new_description}'
+                WHERE id = {$this->getId()};");
+                $this->setTitle($new_title);
+                $this->setDescription($new_description);
+        }
+
+        //Find unit by id:
+        static function find($search_id)
+        {
+            $found_unit = NULL;
+            $units = Unit::getAll();
+            foreach($units as $unit) {
+                $unit_id = $unit->getId();
+                if($unit_id == $search_id) {
+                    $found_unit = $unit;
+                }
+            }
+            return $found_unit;
+        }
     }
 ?>

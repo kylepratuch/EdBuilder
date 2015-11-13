@@ -52,6 +52,40 @@ class UnitTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals([$test_unit2], $result);
     }
+
+    function testUpdateUnit()
+    {
+        $title = "Into the Wild";
+        $description = "The life and death of Chris McCandless.";
+        $test_unit = new Unit($title, $description);
+        $test_unit->save();
+
+        $title2 = "The Catcher in the Rye";
+        $description2 = "Foul-mouthed kid is angsty.";
+
+        $test_unit->updateUnit($title2, $description2);
+        $result = Unit::getAll();
+
+        $this->assertEquals($test_unit, $result[0]);
+    }
+
+    //Test find function
+    function testFind()
+    {
+        $title = "Into the Wild";
+        $description = "The life and death of Chris McCandless.";
+        $test_unit = new Unit($title, $description);
+        $test_unit->save();
+
+        $title2 = "The Catcher in the Rye";
+        $description2 = "Foul-mouthed kid is angsty.";
+        $test_unit2 = new Unit($title2, $description2);
+        $test_unit2->save();
+
+        $result = Unit::find($test_unit->getId());
+
+        $this->assertEquals($test_unit, $result);
+    }
 }
 
 ?>
