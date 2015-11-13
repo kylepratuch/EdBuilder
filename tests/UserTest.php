@@ -59,6 +59,27 @@ class UserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals([$test_user2], $result);
 
     }
+
+    function testFind()
+    {
+        $name = "John Doe";
+        $password = "password";
+        $email = "johndoe@osa.biz";
+        $signed_in = 0;
+        $test_user = new User($name, $password, $email, $signed_in);
+        $test_user->save();
+
+        $name2 = "Jane Boe";
+        $password2 = "wordpass";
+        $email2 = "janeboe@osa.biz";
+        $signed_in2 = 0;
+        $test_user2 = new User($name2, $password2, $email2, $signed_in2);
+        $test_user2->save();
+
+        $result = User::find($test_user->getId());
+
+        $this->assertEquals($test_user, $result);
+    }
 }
 
 ?>

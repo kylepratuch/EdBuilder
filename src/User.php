@@ -118,5 +118,20 @@
             }
             return $users;
         }
+
+        //Find user by id:
+        static function find($search_id)
+        {
+            $found_user = NULL;
+            $users = User::getAll();
+            foreach($users as $user) {
+                $user_id = $user->getId();
+                if($user_id == $search_id) {
+                    $found_user = $user;
+                }
+            }
+            return $found_user;
+        }
+        
     }
 ?>
