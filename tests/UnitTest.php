@@ -34,6 +34,24 @@ class UnitTest extends PHPUnit_Framework_TestCase
         //Assert
         $this->assertEquals($test_unit, $result[0]);
     }
+
+    function testDelete()
+    {
+        $title = "Into the Wild";
+        $description = "The life and death of Chris McCandless.";
+        $test_unit = new Unit($title, $description);
+        $test_unit->save();
+
+        $title2 = "The Catcher in the Rye";
+        $description2 = "Foul-mouthed kid is angsty.";
+        $test_unit2 = new Unit($title2, $description2);
+        $test_unit2->save();
+
+        $test_unit->delete();
+        $result = Unit::getAll();
+
+        $this->assertEquals([$test_unit2], $result);
+    }
 }
 
 ?>
