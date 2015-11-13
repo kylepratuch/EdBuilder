@@ -85,7 +85,7 @@
         //Delete ALL lessons
         static function deleteAll()
         {
-            $GLOBALS['DB']->exec("DELETE FROM courses;");
+            $GLOBALS['DB']->exec("DELETE FROM lessons;");
         }
 
         //Get all lessons in table
@@ -105,15 +105,6 @@
             }
             return $lessons;
         }
-
-
-
-
-
-
-
-
-
 
     }
 
