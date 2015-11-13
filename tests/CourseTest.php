@@ -35,6 +35,26 @@ class CourseTest extends PHPUnit_Framework_TestCase
         //Assert
         $this->assertEquals($test_course, $result[0]);
     }
+
+    function testDelete()
+    {
+        $title = "Literature";
+        $subject = "English";
+        $description = "Deconstructing English literature.";
+        $test_course = new Course($title, $subject, $description);
+        $test_course->save();
+
+        $title2 = "Algebra";
+        $subject2 = "Math";
+        $description2 = "Introduction to algebraic equations.";
+        $test_course2 = new Course($title2, $subject2, $description2);
+        $test_course2->save();
+
+        $test_course->delete();
+        $result = Course::getAll();
+
+        $this->assertEquals([$test_course2], $result);
+    }
 }
 
 ?>
