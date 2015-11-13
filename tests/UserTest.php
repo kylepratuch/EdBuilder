@@ -19,7 +19,7 @@ class UserTest extends PHPUnit_Framework_TestCase
         User::deleteAll();
     }
 
-    // This tests our save and getAll functions:
+    // Test our CRUD:
     function testSave()
     {
         //Arrange
@@ -79,6 +79,7 @@ class UserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($test_user, $result[0]);
     }
 
+    //Test find function
     function testFind()
     {
         $name = "John Doe";
