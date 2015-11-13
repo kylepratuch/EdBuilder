@@ -106,6 +106,19 @@
             return $lessons;
         }
 
+        //Find lesson by id:
+        static function find($search_id)
+        {
+            $found_lesson = NULL;
+            $lessons = Lesson::getAll();
+            foreach($lessons as $lesson) {
+                $lesson_id = $lesson->getId();
+                if($lesson_id == $search_id) {
+                    $found_lesson = $lesson;
+                }
+            }
+            return $found_lesson;
+        }
     }
 
 ?>
