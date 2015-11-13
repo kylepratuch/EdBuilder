@@ -19,7 +19,7 @@ class CourseTest extends PHPUnit_Framework_TestCase
         Course::deleteAll();
     }
 
-    //Test save and getAll functions
+    //Test our CRUD:
     function testSave()
     {
         //Arrange
@@ -72,6 +72,26 @@ class CourseTest extends PHPUnit_Framework_TestCase
         $result = Course::getAll();
 
         $this->assertEquals($test_course, $result[0]);
+    }
+
+    //Test find function
+    function testFind()
+    {
+        $title = "Literature";
+        $subject = "English";
+        $description = "Deconstructing English literature.";
+        $test_course = new Course($title, $subject, $description);
+        $test_course->save();
+
+        $title2 = "Algebra";
+        $subject2 = "Math";
+        $description2 = "Introduction to algebraic equations.";
+        $test_course2 = new Course($title2, $subject2, $description2);
+        $test_course2->save();
+
+        $result = Course::find($test_course->getId());
+
+        $this->assertEquals($test_course, $result);
     }
 }
 

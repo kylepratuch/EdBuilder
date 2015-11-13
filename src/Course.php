@@ -95,7 +95,7 @@
             return $courses;
         }
 
-        //Edit user's info
+        //Edit course info
         function updateCourse($new_title, $new_subject, $new_description)
         {
             $GLOBALS['DB']->exec("UPDATE courses SET
@@ -106,6 +106,20 @@
                 $this->setTitle($new_title);
                 $this->setSubject($new_subject);
                 $this->setDescription($new_description);
+        }
+
+        //Find course by id:
+        static function find($search_id)
+        {
+            $found_course = NULL;
+            $courses = Course::getAll();
+            foreach($courses as $course) {
+                $course_id = $course->getId();
+                if($course_id == $search_id) {
+                    $found_course = $course;
+                }
+            }
+            return $found_course;
         }
 
     }

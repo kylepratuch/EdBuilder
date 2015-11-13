@@ -131,7 +131,7 @@
                 $this->setPassword($new_password);
                 $this->setEmail($new_email);
         }
-        
+
         //Find user by id:
         static function find($search_id)
         {
