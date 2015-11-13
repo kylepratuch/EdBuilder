@@ -60,6 +60,25 @@ class UserTest extends PHPUnit_Framework_TestCase
 
     }
 
+    function testUpdateUser()
+    {
+        $name = "John Doe";
+        $password = "password";
+        $email = "johndoe@osa.biz";
+        $signed_in = 0;
+        $test_user = new User($name, $password, $email, $signed_in);
+        $test_user->save();
+
+        $name2 = "Jane Boe";
+        $password2 = "wordpass";
+        $email2 = "janeboe@osa.biz";
+
+        $test_user->updateUser($name2, $password2, $email2);
+        $result = User::getAll();
+
+        $this->assertEquals($test_user, $result[0]);
+    }
+
     function testFind()
     {
         $name = "John Doe";
@@ -79,25 +98,6 @@ class UserTest extends PHPUnit_Framework_TestCase
         $result = User::find($test_user->getId());
 
         $this->assertEquals($test_user, $result);
-    }
-
-    function testUpdateUser()
-    {
-        $name = "John Doe";
-        $password = "password";
-        $email = "johndoe@osa.biz";
-        $signed_in = 0;
-        $test_user = new User($name, $password, $email, $signed_in);
-        $test_user->save();
-
-        $name2 = "Jane Boe";
-        $password2 = "wordpass";
-        $email2 = "janeboe@osa.biz";
-
-        $test_user->updateUser($name2, $password2, $email2);
-        $result = User::getAll();
-
-        $this->assertEquals($test_user, $result[0]);
     }
 }
 

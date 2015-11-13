@@ -119,6 +119,19 @@
             return $users;
         }
 
+        //Edit user's info
+        function updateUser($new_name, $new_password, $new_email)
+        {
+            $GLOBALS['DB']->exec("UPDATE users SET
+                    name = '{$new_name}',
+                    password = '{$new_password}',
+                    email = '{$new_email}'
+                WHERE id = {$this->getId()};");
+                $this->setName($new_name);
+                $this->setPassword($new_password);
+                $this->setEmail($new_email);
+        }
+        
         //Find user by id:
         static function find($search_id)
         {
@@ -131,19 +144,6 @@
                 }
             }
             return $found_user;
-        }
-
-        //Edit user's info
-        function updateUser($new_name, $new_password, $new_email)
-        {
-            $GLOBALS['DB']->exec("UPDATE users SET
-                    name = '{$new_name}',
-                    password = '{$new_password}',
-                    email = '{$new_email}'
-                WHERE id = {$this->getId()};");
-                $this->setName($new_name);
-                $this->setPassword($new_password);
-                $this->setEmail($new_email);
         }
 
     }

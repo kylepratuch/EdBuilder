@@ -28,7 +28,7 @@
         }
 
         //$subject setter and getter
-        function setSubject()
+        function setSubject($new_subject)
         {
             $this->subject = (string) $new_subject;
         }
@@ -39,7 +39,7 @@
         }
 
         //$description setter and getter
-        function setDescription()
+        function setDescription($new_description)
         {
             $this->description = (string) $new_description;
         }
@@ -94,5 +94,19 @@
             }
             return $courses;
         }
+
+        //Edit user's info
+        function updateCourse($new_title, $new_subject, $new_description)
+        {
+            $GLOBALS['DB']->exec("UPDATE courses SET
+                    title = '{$new_title}',
+                    subject = '{$new_subject}',
+                    description = '{$new_description}'
+                WHERE id = {$this->getId()};");
+                $this->setTitle($new_title);
+                $this->setSubject($new_subject);
+                $this->setDescription($new_description);
+        }
+
     }
 ?>
