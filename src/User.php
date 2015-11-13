@@ -70,24 +70,53 @@
             return $this->id;
         }
 
-        //Create a new User
-        function createUser()
-        {
+        // //Create a new User - use this for password hashing?
+        // function createUser()
+        // {
+        //
+        // }
 
-        }
-
-        //Save a User
+        //Save a user to the database
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO patrons (name, password, email, signed_in) VALUES
+            $GLOBALS['DB']->exec("INSERT INTO users (name, password, email, signed_in) VALUES
                 ('{$this->getName()}',
                  '{$this->getPassword()}',
                  '{$this->getEmail()}',
-                 '{$this->getSignedIn()},
-                 ');
+                 {$this->getSignedIn()});
             ");
 
             $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        //Delete a single user
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM users WHERE id = {$this->getId()};");
+        }
+
+        //Delete ALL users
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM users;");
+        }
+
+        //Get all users in table
+        static function getAll()
+        {
+            $returned_users = $GLOBALS['DB']->query("SELECT * FROM users;");
+            $users = array();
+            foreach ($returned_users as $user) {
+                $name       = $user['name'];
+                $password   = $user['password'];
+                $email      = $user['email'];
+                $signed_in  = $user['signed_in'];
+                $id         = $user['id'];
+
+                $new_user = new User($name, $password, $email, $signed_in, $id);
+                array_push($users, $new_user);
+            }
+            return $users;
         }
     }
 ?>
