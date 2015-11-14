@@ -83,7 +83,7 @@
                 ('{$this->getName()}',
                  '{$this->getPassword()}',
                  '{$this->getEmail()}',
-                 {$this->getSignedIn()});
+                  {$this->getSignedIn()});
             ");
 
             $this->id = $GLOBALS['DB']->lastInsertId();
@@ -145,6 +145,5 @@
             }
             return $found_user;
         }
-
     }
 ?>

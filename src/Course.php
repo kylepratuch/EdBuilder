@@ -5,14 +5,16 @@
         private $title;
         private $subject;
         private $description;
+        private $user_id;
         private $id;
 
 
-        function __construct($title, $subject, $description, $id = null)
+        function __construct($title, $subject, $description, $user_id, $id = null)
         {
             $this->title = $title;
             $this->subject = $subject;
             $this->description = $description;
+            $this->user_id = $user_id;
             $this->id = $id;
         }
 
@@ -49,6 +51,11 @@
             return $this->description;
         }
 
+        function getUserId()
+        {
+            return $this->user_id;
+        }
+
         function getId()
         {
             return $this->id;
@@ -57,12 +64,12 @@
         //Save a course to the database
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO courses (title, subject, description) VALUES
+            $GLOBALS['DB']->exec("INSERT INTO courses (title, subject, description, user_id) VALUES
                 ('{$this->getTitle()}',
                  '{$this->getSubject()}',
-                 '{$this->getDescription()}');
+                 '{$this->getDescription()}',
+                  {$this->getUserId()});
             ");
-
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -87,9 +94,10 @@
                 $title          = $course['title'];
                 $subject        = $course['subject'];
                 $description    = $course['description'];
+                $user_id        = $course['user_id'];
                 $id             = $course['id'];
 
-                $new_course = new Course($title, $subject, $description, $id);
+                $new_course = new Course($title, $subject, $description, $user_id, $id);
                 array_push($courses, $new_course);
             }
             return $courses;
@@ -121,6 +129,5 @@
             }
             return $found_course;
         }
-
     }
 ?>

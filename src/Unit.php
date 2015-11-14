@@ -4,12 +4,14 @@
     {
         private $title;
         private $description;
+        private $course_id;
         private $id;
 
-        function __construct($title, $description, $id = null)
+        function __construct($title, $description, $course_id, $id = null)
         {
             $this->title = $title;
             $this->description = $description;
+            $this->course_id = $course_id;
             $this->id = $id;
         }
 
@@ -35,6 +37,11 @@
             return $this->description;
         }
 
+        function getCourseId()
+        {
+            return $this->course_id;
+        }
+
         function getId()
         {
             return $this->id;
@@ -45,7 +52,8 @@
         {
             $GLOBALS['DB']->exec("INSERT INTO units (title, description) VALUES
                 ('{$this->getTitle()}',
-                 '{$this->getDescription()}');
+                 '{$this->getDescription()}',
+                  {$this->getCourseId()});
             ");
 
             $this->id = $GLOBALS['DB']->lastInsertId();
@@ -71,6 +79,7 @@
             foreach ($returned_units as $unit) {
                 $title          = $unit['title'];
                 $description    = $unit['description'];
+                $course_id      = $unit['course_id']
                 $id             = $unit['id'];
 
                 $new_unit = new Unit($title, $description, $id);

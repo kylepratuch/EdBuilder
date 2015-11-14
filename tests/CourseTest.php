@@ -5,6 +5,7 @@
 */
 
 require_once "src/Course.php";
+require_once "src/User.php";
 
 $server = 'mysql:host=localhost;dbname=builder_test_database';
 $username = 'root';
@@ -17,16 +18,25 @@ class CourseTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         Course::deleteAll();
+        User::deleteAll();
     }
 
     //Test our CRUD:
     function testSave()
     {
         //Arrange
+        $name = "John Doe";
+        $password = "password";
+        $email = "johndoe@osa.biz";
+        $signed_in = 0;
+        $test_user = new User($name, $password, $email, $signed_in);
+        $test_user->save();
+
         $title = "Literature";
         $subject = "English";
         $description = "Deconstructing English literature.";
-        $test_course = new Course($title, $subject, $description);
+        $user_id = $test_user->getId();
+        $test_course = new Course($title, $subject, $description, $user_id);
 
         //Act
         $test_course->save();
@@ -38,16 +48,23 @@ class CourseTest extends PHPUnit_Framework_TestCase
 
     function testDelete()
     {
+        $name = "John Doe";
+        $password = "password";
+        $email = "johndoe@osa.biz";
+        $signed_in = 0;
+        $test_user = new User($name, $password, $email, $signed_in);
+        $test_user->save();
+
         $title = "Literature";
         $subject = "English";
         $description = "Deconstructing English literature.";
-        $test_course = new Course($title, $subject, $description);
-        $test_course->save();
+        $user_id = $test_user->getId();
+        $test_course = new Course($title, $subject, $description, $user_id);
 
         $title2 = "Algebra";
         $subject2 = "Math";
         $description2 = "Introduction to algebraic equations.";
-        $test_course2 = new Course($title2, $subject2, $description2);
+        $test_course2 = new Course($title2, $subject2, $description2, $user_id);
         $test_course2->save();
 
         $test_course->delete();
@@ -58,10 +75,18 @@ class CourseTest extends PHPUnit_Framework_TestCase
 
     function testUpdateCourse()
     {
+        $name = "John Doe";
+        $password = "password";
+        $email = "johndoe@osa.biz";
+        $signed_in = 0;
+        $test_user = new User($name, $password, $email, $signed_in);
+        $test_user->save();
+
         $title = "Literature";
         $subject = "English";
         $description = "Deconstructing English literature.";
-        $test_course = new Course($title, $subject, $description);
+        $user_id = $test_user->getId();
+        $test_course = new Course($title, $subject, $description, $user_id);
         $test_course->save();
 
         $title2 = "Algebra";
@@ -77,16 +102,24 @@ class CourseTest extends PHPUnit_Framework_TestCase
     //Test find function
     function testFind()
     {
+        $name = "John Doe";
+        $password = "password";
+        $email = "johndoe@osa.biz";
+        $signed_in = 0;
+        $test_user = new User($name, $password, $email, $signed_in);
+        $test_user->save();
+
         $title = "Literature";
         $subject = "English";
         $description = "Deconstructing English literature.";
-        $test_course = new Course($title, $subject, $description);
+        $user_id = $test_user->getId();
+        $test_course = new Course($title, $subject, $description, $user_id);
         $test_course->save();
 
         $title2 = "Algebra";
         $subject2 = "Math";
         $description2 = "Introduction to algebraic equations.";
-        $test_course2 = new Course($title2, $subject2, $description2);
+        $test_course2 = new Course($title2, $subject2, $description2, $user_id);
         $test_course2->save();
 
         $result = Course::find($test_course->getId());
