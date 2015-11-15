@@ -112,5 +112,19 @@
             }
             return $found_unit;
         }
+
+        //Get lessons in unit:
+        function getLessons()
+        {
+            $returned_lessons = $GLOBALS['DB']->query("SELECT * FROM lessons WHERE unit_id = {$this->getId()};");
+            $unit_lessons = array();
+            foreach ($returned_lessons as $lesson) {
+                $lesson_id = $lesson['id'];
+                $found_lesson = Lesson::find($lesson_id);
+
+                array_push($unit_lessons, $found_lesson);
+            }
+            return $unit_lessons;
+        }
     }
 ?>

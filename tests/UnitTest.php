@@ -7,6 +7,7 @@
 require_once "src/Unit.php";
 require_once "src/Course.php";
 require_once "src/User.php";
+require_once "src/Lesson.php";
 
 $server = 'mysql:host=localhost;dbname=builder_test_database';
 $username = 'root';
@@ -21,6 +22,7 @@ class UnitTest extends PHPUnit_Framework_TestCase
         Unit::deleteAll();
         Course::deleteAll();
         User::deleteAll();
+        Lesson::deleteAll();
     }
 
     //Test our CRUD:
@@ -149,6 +151,47 @@ class UnitTest extends PHPUnit_Framework_TestCase
         $result = Unit::find($test_unit->getId());
 
         $this->assertEquals($test_unit, $result);
+    }
+
+    //Test getLessons function
+    function testGetLessons()
+    {
+        $name = "John Doe";
+        $password = "password";
+        $email = "johndoe@osa.biz";
+        $signed_in = 0;
+        $test_user = new User($name, $password, $email, $signed_in);
+        $test_user->save();
+
+        $course_title = "Literature";
+        $subject = "English";
+        $course_description = "Deconstructing English literature.";
+        $user_id = $test_user->getId();
+        $test_course = new Course($course_title, $subject, $course_description, $user_id);
+        $test_course->save();
+
+        $unit_title = "Into the Wild";
+        $unit_description = "The life and death of Chris McCandless.";
+        $course_id = $test_course->getId();
+        $test_unit = new Unit($unit_title, $unit_description, $course_id);
+        $test_unit->save();
+
+        $unit_title2 = "The Catcher in the Rye";
+        $unit_description2 = "Foul-mouthed kid is angsty.";
+        $test_unit2 = new Unit($unit_title2, $unit_description2, $course_id);
+        $test_unit2->save();
+
+        $lesson_title = "Into the Wild: Chapter 1";
+        $objective = "Students will read and discuss Chapter 1";
+        $materials = "Books, discussion packets, pencils";
+        $body = "Lorem ipsum etc etc blah blah blah blah...";
+        $unit_id = $test_unit->getId();
+        $test_lesson = new Lesson($lesson_title, $objective, $materials, $body, $unit_id);
+        $test_lesson->save();
+
+        $result = $test_unit->getLessons();
+
+        $this->assertEquals($test_lesson, $result[0]);
     }
 }
 
