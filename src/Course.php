@@ -107,8 +107,8 @@
         function updateCourse($new_title, $new_subject, $new_description)
         {
             $GLOBALS['DB']->exec("UPDATE courses SET
-                    title = '{$new_title}',
-                    subject = '{$new_subject}',
+                    title       = '{$new_title}',
+                    subject     = '{$new_subject}',
                     description = '{$new_description}'
                 WHERE id = {$this->getId()};");
                 $this->setTitle($new_title);

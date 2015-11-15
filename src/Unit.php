@@ -92,7 +92,7 @@
         function updateUnit($new_title, $new_description)
         {
             $GLOBALS['DB']->exec("UPDATE units SET
-                    title = '{$new_title}',
+                    title       = '{$new_title}',
                     description = '{$new_description}'
                 WHERE id = {$this->getId()};");
                 $this->setTitle($new_title);
