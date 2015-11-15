@@ -129,5 +129,19 @@
             }
             return $found_course;
         }
+
+        //Get units in a course
+        function getUnits()
+        {
+            $returned_units = $GLOBALS['DB']->query("SELECT * FROM units WHERE course_id = {$this->getId()};");
+            $course_units = array();
+            foreach ($returned_units as $unit) {
+                $unit_id = $unit['id'];
+                $found_unit = Unit::find($unit_id);
+
+                array_push($course_units, $found_unit);
+            }
+            return $course_units;
+        }
     }
 ?>

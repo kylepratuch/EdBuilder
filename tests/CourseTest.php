@@ -6,6 +6,7 @@
 
 require_once "src/Course.php";
 require_once "src/User.php";
+require_once "src/Unit.php";
 
 $server = 'mysql:host=localhost;dbname=builder_test_database';
 $username = 'root';
@@ -19,6 +20,7 @@ class CourseTest extends PHPUnit_Framework_TestCase
     {
         Course::deleteAll();
         User::deleteAll();
+        Unit::deleteAll();
     }
 
     //Test our CRUD:
@@ -125,6 +127,40 @@ class CourseTest extends PHPUnit_Framework_TestCase
         $result = Course::find($test_course->getId());
 
         $this->assertEquals($test_course, $result);
+    }
+
+    //Test getUnits function
+    function testGetUnits()
+    {
+        $name = "John Doe";
+        $password = "password";
+        $email = "johndoe@osa.biz";
+        $signed_in = 0;
+        $test_user = new User($name, $password, $email, $signed_in);
+        $test_user->save();
+
+        $course_title = "Literature";
+        $subject = "English";
+        $course_description = "Deconstructing English literature.";
+        $user_id = $test_user->getId();
+        $test_course = new Course($course_title, $subject, $course_description, $user_id);
+        $test_course->save();
+
+        $title2 = "Algebra";
+        $subject2 = "Math";
+        $description2 = "Introduction to algebraic equations.";
+        $test_course2 = new Course($title2, $subject2, $description2, $user_id);
+        $test_course2->save();
+
+        $unit_title = "Into the Wild";
+        $unit_description = "The life and death of Chris McCandless.";
+        $course_id = $test_course->getId();
+        $test_unit = new Unit($unit_title, $unit_description, $course_id);
+        $test_unit->save();
+
+        $result = $test_course->getUnits();
+        
+        $this->assertEquals($test_unit, $result[0]);
     }
 }
 
