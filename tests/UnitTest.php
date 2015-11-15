@@ -5,6 +5,8 @@
 */
 
 require_once "src/Unit.php";
+require_once "src/Course.php";
+require_once "src/User.php";
 
 $server = 'mysql:host=localhost;dbname=builder_test_database';
 $username = 'root';
@@ -17,15 +19,32 @@ class UnitTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         Unit::deleteAll();
+        Course::deleteAll();
+        User::deleteAll();
     }
 
     //Test our CRUD:
     function testSave()
     {
         //Arrange
-        $title = "Into the Wild";
-        $description = "The life and death of Chris McCandless.";
-        $test_unit = new Unit($title, $description);
+        $name = "John Doe";
+        $password = "password";
+        $email = "johndoe@osa.biz";
+        $signed_in = 0;
+        $test_user = new User($name, $password, $email, $signed_in);
+        $test_user->save();
+
+        $course_title = "Literature";
+        $subject = "English";
+        $course_description = "Deconstructing English literature.";
+        $user_id = $test_user->getId();
+        $test_course = new Course($course_title, $subject, $course_description, $user_id);
+        $test_course->save();
+
+        $unit_title = "Into the Wild";
+        $unit_description = "The life and death of Chris McCandless.";
+        $course_id = $test_course->getId();
+        $test_unit = new Unit($unit_title, $unit_description, $course_id);
 
         //Act
         $test_unit->save();
@@ -37,14 +56,29 @@ class UnitTest extends PHPUnit_Framework_TestCase
 
     function testDelete()
     {
-        $title = "Into the Wild";
-        $description = "The life and death of Chris McCandless.";
-        $test_unit = new Unit($title, $description);
+        $name = "John Doe";
+        $password = "password";
+        $email = "johndoe@osa.biz";
+        $signed_in = 0;
+        $test_user = new User($name, $password, $email, $signed_in);
+        $test_user->save();
+
+        $course_title = "Literature";
+        $subject = "English";
+        $course_description = "Deconstructing English literature.";
+        $user_id = $test_user->getId();
+        $test_course = new Course($course_title, $subject, $course_description, $user_id);
+        $test_course->save();
+
+        $unit_title = "Into the Wild";
+        $unit_description = "The life and death of Chris McCandless.";
+        $course_id = $test_course->getId();
+        $test_unit = new Unit($unit_title, $unit_description, $course_id);
         $test_unit->save();
 
-        $title2 = "The Catcher in the Rye";
-        $description2 = "Foul-mouthed kid is angsty.";
-        $test_unit2 = new Unit($title2, $description2);
+        $unit_title2 = "The Catcher in the Rye";
+        $unit_description2 = "Foul-mouthed kid is angsty.";
+        $test_unit2 = new Unit($unit_title2, $unit_description2, $course_id);
         $test_unit2->save();
 
         $test_unit->delete();
@@ -55,15 +89,30 @@ class UnitTest extends PHPUnit_Framework_TestCase
 
     function testUpdateUnit()
     {
-        $title = "Into the Wild";
-        $description = "The life and death of Chris McCandless.";
-        $test_unit = new Unit($title, $description);
+        $name = "John Doe";
+        $password = "password";
+        $email = "johndoe@osa.biz";
+        $signed_in = 0;
+        $test_user = new User($name, $password, $email, $signed_in);
+        $test_user->save();
+
+        $course_title = "Literature";
+        $subject = "English";
+        $course_description = "Deconstructing English literature.";
+        $user_id = $test_user->getId();
+        $test_course = new Course($course_title, $subject, $course_description, $user_id);
+        $test_course->save();
+
+        $unit_title = "Into the Wild";
+        $unit_description = "The life and death of Chris McCandless.";
+        $course_id = $test_course->getId();
+        $test_unit = new Unit($unit_title, $unit_description, $course_id);
         $test_unit->save();
 
-        $title2 = "The Catcher in the Rye";
-        $description2 = "Foul-mouthed kid is angsty.";
+        $unit_title2 = "The Catcher in the Rye";
+        $unit_description2 = "Foul-mouthed kid is angsty.";
 
-        $test_unit->updateUnit($title2, $description2);
+        $test_unit->updateUnit($unit_title2, $unit_description2);
         $result = Unit::getAll();
 
         $this->assertEquals($test_unit, $result[0]);
@@ -72,14 +121,29 @@ class UnitTest extends PHPUnit_Framework_TestCase
     //Test find function
     function testFind()
     {
-        $title = "Into the Wild";
-        $description = "The life and death of Chris McCandless.";
-        $test_unit = new Unit($title, $description);
+        $name = "John Doe";
+        $password = "password";
+        $email = "johndoe@osa.biz";
+        $signed_in = 0;
+        $test_user = new User($name, $password, $email, $signed_in);
+        $test_user->save();
+
+        $course_title = "Literature";
+        $subject = "English";
+        $course_description = "Deconstructing English literature.";
+        $user_id = $test_user->getId();
+        $test_course = new Course($course_title, $subject, $course_description, $user_id);
+        $test_course->save();
+
+        $unit_title = "Into the Wild";
+        $unit_description = "The life and death of Chris McCandless.";
+        $course_id = $test_course->getId();
+        $test_unit = new Unit($unit_title, $unit_description, $course_id);
         $test_unit->save();
 
-        $title2 = "The Catcher in the Rye";
-        $description2 = "Foul-mouthed kid is angsty.";
-        $test_unit2 = new Unit($title2, $description2);
+        $unit_title2 = "The Catcher in the Rye";
+        $unit_description2 = "Foul-mouthed kid is angsty.";
+        $test_unit2 = new Unit($unit_title2, $unit_description2, $course_id);
         $test_unit2->save();
 
         $result = Unit::find($test_unit->getId());

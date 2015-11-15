@@ -50,7 +50,7 @@
         //Save a unit of study to the database
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO units (title, description) VALUES
+            $GLOBALS['DB']->exec("INSERT INTO units (title, description, course_id) VALUES
                 ('{$this->getTitle()}',
                  '{$this->getDescription()}',
                   {$this->getCourseId()});
@@ -79,10 +79,10 @@
             foreach ($returned_units as $unit) {
                 $title          = $unit['title'];
                 $description    = $unit['description'];
-                $course_id      = $unit['course_id']
+                $course_id      = $unit['course_id'];
                 $id             = $unit['id'];
 
-                $new_unit = new Unit($title, $description, $id);
+                $new_unit = new Unit($title, $description, $course_id, $id);
                 array_push($units, $new_unit);
             }
             return $units;
