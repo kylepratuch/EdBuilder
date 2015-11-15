@@ -145,5 +145,19 @@
             }
             return $found_user;
         }
+
+        //Get courses on User's account
+        function getCourses()
+        {
+            $returned_courses = $GLOBALS['DB']->query("SELECT * FROM courses WHERE user_id = {$this->getId()};");
+            $user_courses = array();
+            foreach ($returned_courses as $course) {
+                $course_id = $course['id'];
+                $found_course = Course::find($course_id);
+                
+                array_push($user_courses, $found_course);
+            }
+            return $user_courses;
+        }
     }
 ?>
