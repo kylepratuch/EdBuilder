@@ -31,6 +31,14 @@
         return $app['twig']->render("index.html.twig", array());
     });
 
+    $app->get("/sign_up", function() use($app) {
+        return $app['twig']->render("sign_up.html.twig", array());
+    });
+
+    $app->get("/about", function() use($app) {
+        return $app['twig']->render("about.html.twig", array());
+    });
+
     return $app;
 
 ?>
