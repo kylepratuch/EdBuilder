@@ -146,6 +146,20 @@
             return $found_user;
         }
 
+        //Find user by username:
+        static function search($search_name)
+        {
+            $found_user = NULL;
+            $users = User::getAll();
+            foreach($users as $user) {
+                $user_name = $user->getName();
+                if($user_name == $search_name) {
+                    $found_user = $user;
+                }
+            }
+            return $found_user;
+        }
+
         //Get courses on User's account
         function getCourses()
         {
