@@ -40,7 +40,7 @@
         return $app['twig']->render("about.html.twig", array());
     });
 
-    //Dashboard Routes
+    //=========== Dashboard Routes ================
     $app->get("/show_dashboard/{id}", function($id) use($app) {
         $username = $_GET['username'];
         $user = User::search($username);
@@ -56,19 +56,19 @@
         }
     });
 
-    $app->get("/show_edit_user/{id}", function($id) use($app) {
+    //Edit user
+    $app->get("/show_edit/{id}", function($id) use($app) {
         $user = User::find($id);
         return $app['twig']->render("edit_user.html.twig", array(
             'user' => $user,
-            'id' => $id
         ));
     });
 
-    $app->patch("/edit_user/{id}", function($id) use($app) {
+    $app->patch("show_edit/edit_user/{id}", function($id) use($app) {
         $user = User::find($id);
-        $password = $user->getPassword();
         $new_name = $_POST['new_name'];
-        $new_email = $_POST['email'];
+        $new_password = $_POST['new_password'];
+        $new_email = $_POST['new_email'];
         $user->updateUser($new_name, $new_email, $password);
 
         return $app['twig']->render("dashboard.html.twig", array(
