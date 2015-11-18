@@ -52,6 +52,19 @@
         }
     });
 
+    //Sign up routes
+    $app->get("/show_sign_up", function() use($app) {
+        return $app['twig']->render("sign_up.html.twig", array());
+    });
+
+    $app->post("/user_sign_up", function() use($app) {
+        return $app['twig']->render("sign_up_confirm.html.twig", array());
+        $new_user = new User($_POST['username'], $_POST['email'], $_POST['password']);
+        $new_user->save();
+
+        return $app['twig']->render("sign_up_confirm.html.twig");
+    });
+
     return $app;
 
 ?>
