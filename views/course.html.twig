@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>EdBuilder</title>
+    </head>
+    <body>
+        <p>Title: {{ course.getTitle }}</p>
+        <p>Subject: {{ course.getSubject }}</p>
+        <p>Description: {{ course.getDescription }}</p>
+
+        <h3>Units in this course:</h3>
+        {% if units is not empty %}
+        <ul>
+            {% for unit in units %}
+            <li>
+                <a href="/show_unit/{{ unit.getId }}">{{ unit.getTitle }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>You don't have any units yet!</p>
+        {% endif %}
+
+        <h3>Add a new unit for this course:</h3>
+        <form action="/add_unit/{{ course.getId }}" method="post">
+            <label name="unit_title">Title</label>
+            <input name="unit_title" type="text" />
+
+            <label name="unit_description">Description</label>
+            <input name="unit_description" type="text" />
+
+            <button type="submit">Add</button>
+    </body>
+</html>

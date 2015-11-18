@@ -73,11 +73,7 @@
 
     //Add a course
     $app->post("/add_course/{id}", function($id) use($app) {
-        $title = $_POST['course_title'];
-        $subject = $_POST['course_subject'];
-        $description = $_POST['course_description'];
-
-        $new_course = new Course($title, $subject, $description, $id);
+        $new_course = new Course($_POST['course_title'], $_POST['course_subject'], $_POST['course_description'], $id);
         $new_course->save();
 
         $user = User::find($id);
@@ -108,6 +104,32 @@
         return $app['twig']->render("dashboard.html.twig", array(
             'user' => $user,
             'name' => $user->getName()
+        ));
+    });
+
+    //============== Course Routes ===============
+    $app->get("/show_course/{id}", function($id) use($app) {
+        $course = Course::find($id);
+
+        return $app['twig']->render("course.html.twig", array(
+            'course' => $course,
+            // 'course' => $course->getTitle(),
+            // 'subject' => $course->getSubject(),
+            // 'description' => $course->getDescription(),
+            'units' => $course->getUnits()
+        ));
+    });
+
+    //Add a unit
+    $app->post("/add_unit/{id}", function($id) use($app) {
+        $new_unit = new Unit($_POST['unit_title'], $_POST['unit_description'], $id);
+        $new_unit->save();
+
+        $course = Course::find($id);
+
+        return $app['twig']->render("course.html.twig", array(
+            'course' => $course,
+            'units' => $course->getUnits()
         ));
     });
 
