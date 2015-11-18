@@ -27,6 +27,7 @@
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
+    //Basic get Calls
     $app->get("/", function() use($app) {
         return $app['twig']->render("index.html.twig", array());
     });
@@ -37,6 +38,18 @@
 
     $app->get("/about", function() use($app) {
         return $app['twig']->render("about.html.twig", array());
+    });
+
+    //Get Login call
+    $app->get("/login", function() use($app) {
+        $username = $_GET['username'];
+        $user = User::search($username);
+
+        if($user == NULL) {
+            return $app['twig']->render("index.html.twig", array());
+        } else {
+            return $app['twig']->render("courses.html.twig", array());
+        }
     });
 
     return $app;
