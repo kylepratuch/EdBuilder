@@ -40,7 +40,7 @@
         return $app['twig']->render("about.html.twig", array());
     });
 
-    //Get Login call
+    //Dashboard Routes
     $app->get("/show_dashboard/{id}", function($id) use($app) {
         $username = $_GET['username'];
         $user = User::search($username);
@@ -51,10 +51,32 @@
         } else {
             return $app['twig']->render("dashboard.html.twig", array(
                 'user' => $user,
-                'name' => $user->getName()
+                'name' => $user->getName(),
             ));
         }
     });
+
+    $app->get("/show_edit_user/{id}", function($id) use($app) {
+        $user = User::find($id);
+        return $app['twig']->render("edit_user.html.twig", array(
+            'user' => $user,
+            'id' => $id
+        ));
+    });
+
+    $app->patch("/edit_user/{id}", function($id) use($app) {
+        $user = User::find($id);
+        $password = $user->getPassword();
+        $new_name = $_POST['new_name'];
+        $new_email = $_POST['email'];
+        $user->updateUser($new_name, $new_email, $password);
+
+        return $app['twig']->render("dashboard.html.twig", array(
+            'user' => $user,
+            'name' => $user->getName()
+        ));
+    });
+
 
     //Sign up routes
     $app->get("/show_sign_up", function() use($app) {
