@@ -9,7 +9,7 @@
         private $id;
 
 
-        function __construct($name, $password, $email, $signed_in, $id = null)
+        function __construct($name, $password, $email, $signed_in = 0, $id = null)
         {
             $this->name = $name;
             //Will worry about password hashing later.

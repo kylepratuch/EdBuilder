@@ -41,14 +41,18 @@
     });
 
     //Get Login call
-    $app->get("/login", function() use($app) {
+    $app->get("/show_dashboard/{id}", function($id) use($app) {
         $username = $_GET['username'];
         $user = User::search($username);
+        $id = $user->getId();
 
         if($user == NULL) {
             return $app['twig']->render("index.html.twig", array());
         } else {
-            return $app['twig']->render("courses.html.twig", array());
+            return $app['twig']->render("dashboard.html.twig", array(
+                'user' => $user,
+                'name' => $user->getName()
+            ));
         }
     });
 
@@ -58,7 +62,6 @@
     });
 
     $app->post("/user_sign_up", function() use($app) {
-        return $app['twig']->render("sign_up_confirm.html.twig", array());
         $new_user = new User($_POST['username'], $_POST['email'], $_POST['password']);
         $new_user->save();
 
