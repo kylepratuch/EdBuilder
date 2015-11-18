@@ -40,11 +40,24 @@
         return $app['twig']->render("about.html.twig", array());
     });
 
+    //============== Sign up routes =================
+    $app->get("/show_sign_up", function() use($app) {
+        return $app['twig']->render("sign_up.html.twig", array());
+    });
+
+    $app->post("/user_sign_up", function() use($app) {
+        $new_user = new User($_POST['username'], $_POST['email'], $_POST['password']);
+        $new_user->save();
+
+        return $app['twig']->render("sign_up_confirm.html.twig");
+    });
+
     //=========== Dashboard Routes ================
     $app->get("/show_dashboard/{id}", function($id) use($app) {
         $username = $_GET['username'];
         $user = User::search($username);
         $id = $user->getId();
+        $courses = $user->getCourses();
 
         if($user == NULL) {
             return $app['twig']->render("index.html.twig", array());
@@ -52,8 +65,29 @@
             return $app['twig']->render("dashboard.html.twig", array(
                 'user' => $user,
                 'name' => $user->getName(),
+                'id' => $user->getId(),
+                'courses' => $courses
             ));
         }
+    });
+
+    //Add a course
+    $app->post("/add_course/{id}", function($id) use($app) {
+        $title = $_POST['course_title'];
+        $subject = $_POST['course_subject'];
+        $description = $_POST['course_description'];
+
+        $new_course = new Course($title, $subject, $description, $id);
+        $new_course->save();
+
+        $user = User::find($id);
+
+        return $app['twig']->render("dashboard.html.twig", array(
+            'title' => $new_course->getTitle(),
+            'user' => $user,
+            'name' => $user->getName(),
+            'courses' => $user->getCourses()
+        ));
     });
 
     //Edit user
@@ -64,7 +98,7 @@
         ));
     });
 
-    $app->patch("show_edit/edit_user/{id}", function($id) use($app) {
+    $app->patch("/show_edit/edit_user/{id}", function($id) use($app) {
         $user = User::find($id);
         $new_name = $_POST['new_name'];
         $new_password = $_POST['new_password'];
@@ -75,19 +109,6 @@
             'user' => $user,
             'name' => $user->getName()
         ));
-    });
-
-
-    //Sign up routes
-    $app->get("/show_sign_up", function() use($app) {
-        return $app['twig']->render("sign_up.html.twig", array());
-    });
-
-    $app->post("/user_sign_up", function() use($app) {
-        $new_user = new User($_POST['username'], $_POST['email'], $_POST['password']);
-        $new_user->save();
-
-        return $app['twig']->render("sign_up_confirm.html.twig");
     });
 
     return $app;
