@@ -113,9 +113,6 @@
 
         return $app['twig']->render("course.html.twig", array(
             'course' => $course,
-            // 'course' => $course->getTitle(),
-            // 'subject' => $course->getSubject(),
-            // 'description' => $course->getDescription(),
             'units' => $course->getUnits()
         ));
     });
