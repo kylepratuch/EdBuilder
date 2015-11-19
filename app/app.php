@@ -52,7 +52,7 @@
         return $app['twig']->render("sign_up_confirm.html.twig");
     });
 
-    //=========== Dashboard Routes ================
+    //=========== User Dashboard Routes ================
     $app->get("/show_dashboard/{id}", function($id) use($app) {
         $username = $_GET['username'];
         $user = User::search($username);
@@ -69,21 +69,6 @@
                 'courses' => $courses
             ));
         }
-    });
-
-    //Add a course
-    $app->post("/add_course/{id}", function($id) use($app) {
-        $new_course = new Course($_POST['course_title'], $_POST['course_subject'], $_POST['course_description'], $id);
-        $new_course->save();
-
-        $user = User::find($id);
-
-        return $app['twig']->render("dashboard.html.twig", array(
-            'title' => $new_course->getTitle(),
-            'user' => $user,
-            'name' => $user->getName(),
-            'courses' => $user->getCourses()
-        ));
     });
 
     //Edit user
@@ -106,6 +91,21 @@
             'name' => $user->getName()
         ));
     });
+    
+    //Add a course
+    $app->post("/add_course/{id}", function($id) use($app) {
+        $new_course = new Course($_POST['course_title'], $_POST['course_subject'], $_POST['course_description'], $id);
+        $new_course->save();
+
+        $user = User::find($id);
+
+        return $app['twig']->render("dashboard.html.twig", array(
+            'title' => $new_course->getTitle(),
+            'user' => $user,
+            'name' => $user->getName(),
+            'courses' => $user->getCourses()
+        ));
+    });
 
     //============== Course Routes ===============
     $app->get("/show_course/{id}", function($id) use($app) {
@@ -116,6 +116,10 @@
             'units' => $course->getUnits()
         ));
     });
+
+    //Edit a course
+
+    //Delete a course
 
     //Add a unit
     $app->post("/add_unit/{id}", function($id) use($app) {
@@ -129,6 +133,22 @@
             'units' => $course->getUnits()
         ));
     });
+
+    //================= Unit Routes =================
+    //Show unit
+
+    //Edit a unit
+
+    //Delete a unit
+
+    //Add a lesson
+
+    //================= Lesson Routes ===============
+    //Show lesson
+
+    //Edit a lesson
+
+    //Delete a lesson
 
     return $app;
 
