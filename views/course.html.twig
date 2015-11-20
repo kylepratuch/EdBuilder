@@ -7,6 +7,10 @@
         <p>Subject: {{ course.getSubject }}</p>
         <p>Description: {{ course.getDescription }}</p>
 
+        <a href="/show_course_edit/{{ course.getId }}">Edit this course</a>
+        <a href="/delete_course/{{ course.getId }}">Delete this course.</a>
+        <p>* Deleting a course currently deletes all units tied to it! *</p>
+
         <h3>Units in this course:</h3>
         {% if units is not empty %}
         <ul>
