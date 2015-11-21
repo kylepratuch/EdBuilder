@@ -8,7 +8,11 @@
         <p>Description: {{ course.getDescription }}</p>
 
         <a href="/show_course_edit/{{ course.getId }}">Edit this course</a>
-        <a href="/delete_course/{{ course.getId }}">Delete this course.</a>
+        <!-- <a href="/delete_course/{{ course.getId }}">Delete this course.</a> -->
+        <form action="/delete_course/{{ user.getId }}/{{ course.getId }}">
+            <input name="_method" type="hidden" value="delete">
+            <button type="submit">Delete Course</button>
+        </form>
         <p>* Deleting a course currently deletes all units tied to it! *</p>
 
         <a href="/show_dashboard/{{ user.getId }}">Back to your dashboard.</a>
@@ -27,7 +31,7 @@
         {% endif %}
 
         <h3>Add a new unit for this course:</h3>
-        <form action="/add_unit/{{ course.getId }}" method="post">
+        <form action="/add_unit/{{ user.getId }}/{{ course.getId }}" method="post">
             <label name="unit_title">Title</label>
             <input name="unit_title" type="text" />
 

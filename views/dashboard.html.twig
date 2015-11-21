@@ -4,7 +4,7 @@
     </head>
 
     <body>
-        <h2>Welcome to your dashboard, {{name}}!</h2>
+        <h2>Welcome to your dashboard, {{ user.getName }}!</h2>
 
         <a href="/show_edit/{{user.getId}}">Edit your profile</a>
 
@@ -24,7 +24,7 @@
         {% endif %}
 
         <h4>Add a new course:</h4>
-        <form action="/add_course/{{user.id}}" method="post">
+        <form action="/add_course/{{user.getId}}" method="post">
             <label name="course_title">Title</label>
             <input name="course_title" type="text" />
 
