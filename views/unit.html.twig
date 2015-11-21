@@ -7,7 +7,6 @@
         <p>Description: {{ unit.getDescription }}</p>
 
         <a href="/show_unit_edit/{{ unit.getId }}">Edit this unit</a>
-        <!-- <a href="/delete_course/{{ course.getId }}">Delete this course.</a> -->
         <form action="/delete_unit/{{ course.getId }}/{{ unit.getId }}">
             <input name="_method" type="hidden" value="delete">
             <button type="submit">Delete Unit</button>
@@ -30,7 +29,7 @@
         {% endif %}
 
         <h3>Add a new lesson for this unit:</h3>
-        <form action="/add_lesson/{{ course.getId }}/{{ lesson.getId }}" method="post">
+        <form action="/add_lesson/{{ course.getId }}/{{ unit.getId }}" method="post">
             <label name="lesson_title">Title</label>
             <input name="lesson_title" type="text" />
 

@@ -173,6 +173,16 @@
 
     //================= Unit Routes =================
     //Show unit
+    $app->get("/show_unit/{id}", function($id) use($app) {
+        $unit = Unit::find($id);
+        $course_id = $unit->getCourseId();
+
+        return $app['twig']->render("unit.html.twig", array(
+            'unit' => $unit,
+            'lessons' => $unit->getLessons(),
+            'course' => Course::find($course_id)
+        ));
+    }); 
 
     //Edit a unit
 
