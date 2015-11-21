@@ -212,13 +212,13 @@
         $unit = Unit::find($unit_id);
         $course = Course::find($course_id);
 
-        //Deleting a unit should also deletes orphaned units
+        //Deleting a unit should also deletes orphaned lessons
         $lessons = $unit->getLessons();
         foreach($lessons as $lesson) {
             $lesson->delete();
         }
         $unit->delete();
-        
+
         $user_id = $course->getUserId();
 
         return $app['twig']->render("course.html.twig", array(
@@ -230,6 +230,18 @@
     });
 
     //Add a lesson
+    $app->post("/add_lesson/{course_id}/{unit_id}", function($course_id, $unit_id) use($app) {
+        $new_lesson = new Lesson($_POST['lesson_title'], $_POST['lesson_objective'], $_POST['lesson_materials'], $_POST['lesson_body'], $unit_id);
+        $new_lesson->save();
+
+        $unit = Unit::find($unit_id);
+
+        return $app['twig']->render("unit.html.twig", array(
+            'unit' => $unit,
+            'lessons' => $unit->getLessons(),
+            'course' => Course::find($course_id)
+        ));
+    });
 
     //================= Lesson Routes ===============
     //Show lesson
