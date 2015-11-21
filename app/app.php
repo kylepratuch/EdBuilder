@@ -208,18 +208,24 @@
     });
 
     //Delete a unit
-    $app->get("/delete_course/{user_id}/{course_id}", function($user_id, $course_id) use($app) {
+    $app->get("/delete_unit/{course_id}/{unit_id}", function($course_id, $unit_id) use($app) {
+        $unit = Unit::find($unit_id);
         $course = Course::find($course_id);
-        //Deleting a course should also deletes orphaned units
-        $units = $course->getUnits();
-        foreach($units as $unit) {
-            $unit->delete();
-        }
-        $course->delete();
 
-        return $app['twig']->render("dashboard.html.twig", array(
-            'user' => User::find($user_id),
-            'courses' => $courses
+        //Deleting a unit should also deletes orphaned units
+        $lessons = $unit->getLessons();
+        foreach($lessons as $lesson) {
+            $lesson->delete();
+        }
+        $unit->delete();
+        
+        $user_id = $course->getUserId();
+
+        return $app['twig']->render("course.html.twig", array(
+            'course' => Course::find($course_id),
+            'units' => $units,
+            'user' => User::find($user_id)
+
         ));
     });
 
