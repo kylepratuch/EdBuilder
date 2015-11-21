@@ -182,11 +182,46 @@
             'lessons' => $unit->getLessons(),
             'course' => Course::find($course_id)
         ));
-    }); 
+    });
 
     //Edit a unit
+    $app->get("/show_unit_edit/{id}", function($id) use($app) {
+        $unit = Unit::find($id);
+        return $app['twig']->render("edit_unit.html.twig", array(
+            'unit' => $unit,
+        ));
+    });
+
+    $app->patch("/show_unit_edit/edit_unit/{id}", function($id) use($app) {
+        $unit = Unit::find($id);
+        $new_title = $_POST['new_title'];
+        $new_description = $_POST['new_description'];
+        $unit->updateUnit($new_title, $new_description);
+
+        $course_id = $unit->getCourseId();
+
+        return $app['twig']->render("unit.html.twig", array(
+            'unit' => $unit,
+            'lessons' => $unit->getLessons(),
+            'course' => Course::find($course_id)
+        ));
+    });
 
     //Delete a unit
+    $app->get("/delete_course/{user_id}/{course_id}", function($user_id, $course_id) use($app) {
+        $course = Course::find($course_id);
+        //Deleting a course should also deletes orphaned units
+        $units = $course->getUnits();
+        foreach($units as $unit) {
+            $unit->delete();
+        }
+        $course->delete();
+
+        return $app['twig']->render("dashboard.html.twig", array(
+            'user' => User::find($user_id),
+            'courses' => $courses
+        ));
+    });
 
     //Add a lesson
 
