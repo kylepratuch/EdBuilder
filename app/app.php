@@ -56,7 +56,7 @@
     $app->get("/show_dashboard/{id}", function($id) use($app) {
         $username = $_GET['username'];
         $user = User::search($username);
-        $id = $user->getId();
+        // $id = $user->getId();
         $courses = $user->getCourses();
 
         if($user == NULL) {
@@ -88,7 +88,8 @@
 
         return $app['twig']->render("dashboard.html.twig", array(
             'user' => $user,
-            'name' => $user->getName()
+            'name' => $user->getName(),
+            'courses' => $user->getCourses()
         ));
     });
 
@@ -110,10 +111,12 @@
     //============== Course Routes ===============
     $app->get("/show_course/{id}", function($id) use($app) {
         $course = Course::find($id);
+        $user_id = $course->getUserId();
 
         return $app['twig']->render("course.html.twig", array(
             'course' => $course,
-            'units' => $course->getUnits()
+            'units' => $course->getUnits(),
+            'user' => User::find($user_id)
         ));
     });
 

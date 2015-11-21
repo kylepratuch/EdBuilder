@@ -11,6 +11,8 @@
         <a href="/delete_course/{{ course.getId }}">Delete this course.</a>
         <p>* Deleting a course currently deletes all units tied to it! *</p>
 
+        <a href="/show_dashboard/{{ user.getId }}">Back to your dashboard.</a>
+
         <h3>Units in this course:</h3>
         {% if units is not empty %}
         <ul>
