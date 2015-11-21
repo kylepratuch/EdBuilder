@@ -144,7 +144,7 @@
     //Delete a course
     $app->get("/delete_course/{user_id}/{course_id}", function($user_id, $course_id) use($app) {
         $course = Course::find($course_id);
-        //Deleting a course also deletes orphaned units
+        //Deleting a course should also deletes orphaned units
         $units = $course->getUnits();
         foreach($units as $unit) {
             $unit->delete();
@@ -153,7 +153,6 @@
 
         return $app['twig']->render("dashboard.html.twig", array(
             'user' => User::find($user_id),
-            // 'name' => $user->getName(),
             'courses' => $courses
         ));
     });

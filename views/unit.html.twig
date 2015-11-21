@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>EdBuilder</title>
+    </head>
+    <body>
+        <p>Title: {{ unit.getTitle }}</p>
+        <p>Description: {{ unit.getDescription }}</p>
+
+        <a href="/show_unit_edit/{{ unit.getId }}">Edit this unit</a>
+        <!-- <a href="/delete_course/{{ course.getId }}">Delete this course.</a> -->
+        <form action="/delete_unit/{{ course.getId }}/{{ unit.getId }}">
+            <input name="_method" type="hidden" value="delete">
+            <button type="submit">Delete Unit</button>
+        </form>
+        <p>* Deleting a course currently deletes all units tied to it! *</p>
+
+        <a href="/show_course/{{ course.getId }}">Back to course view.</a>
+
+        <h3>Lessons in this unit:</h3>
+        {% if lessons is not empty %}
+        <ul>
+            {% for lesson in lessons %}
+            <li>
+                <a href="/show_lesson/{{ lesson.getId }}">{{ lesson.getTitle }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>You don't have any lessons yet!</p>
+        {% endif %}
+
+        <h3>Add a new lesson for this unit:</h3>
+        <form action="/add_lesson/{{ course.getId }}/{{ lesson.getId }}" method="post">
+            <label name="lesson_title">Title</label>
+            <input name="lesson_title" type="text" />
+
+            <label name="lesson_objective">Objective</label>
+            <input name="lesson_objective" type="text" />
+
+            <label name="lesson_materials">Materials Needed</label>
+            <input name="lesson_materials" type="text" />
+
+            <label name="lesson_body">Write your lesson procedure here:</label>
+            <textarea name="lesson_body"></textarea>
+
+            <button type="submit">Add</button>
+    </body>
+</html>
