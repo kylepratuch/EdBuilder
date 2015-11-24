@@ -245,10 +245,58 @@
 
     //================= Lesson Routes ===============
     //Show lesson
+    $app->get("/show_lesson/{id}", function($id) use($app) {
+        $lesson = Lesson::find($id);
+        $unit_id = $lesson->getUnitId();
+
+        return $app['twig']->render("lesson.html.twig", array(
+            'lesson' => $lesson,
+            'unit' => Unit::find($unit_id)
+        ));
+    });
 
     //Edit a lesson
+    $app->get("/show_lesson_edit/{id}", function($id) use($app) {
+        $lesson = Lesson::find($id);
+        return $app['twig']->render("edit_lesson.html.twig", array(
+            'lesson' => $lesson,
+        ));
+    });
+
+    $app->patch("/show_lesson_edit/edit_lesson/{id}", function($id) use($app) {
+        $lesson = Lesson::find($id);
+        $new_title = $_POST['new_title'];
+        $new_objective = $_POST['new_objective'];
+        $new_materials = $_POST['new_materials'];
+        $new_body = $_POST['new_body'];
+        $lesson->updateLesson($new_title, $new_objective, $new_materials, $new_body);
+
+        $unit_id = $lesson->getUnitId();
+
+        return $app['twig']->render("lesson.html.twig", array(
+            'lesson' => $lesson,
+            'unit' => Unit::find($unit_id)
+        ));
+    });
 
     //Delete a lesson
+    $app->get("/delete_lesson/{unit_id}/{lesson_id}", function($unit_id, $lesson_id) use($app) {
+        $lesson = Lesson::find($lesson_id);
+
+        $unit = Unit::find($unit_id);
+        $lessons = $unit->getLessons();
+
+        $course_id = $unit->getCourseId();
+
+        $lesson->delete();
+
+        return $app['twig']->render("unit.html.twig", array(
+            'lesson' => $lesson,
+            'unit' => $unit,
+            'lessons' => $lessons,
+            'course' => Course::find($course_id)
+        ));
+    });
 
     return $app;
 
