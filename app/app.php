@@ -53,22 +53,32 @@
     });
 
     //=========== User Dashboard Routes ================
-    $app->get("/show_dashboard/{id}", function($id) use($app) {
+    //Sign In
+    $app->get("/sign_in", function() use($app) {
         $username = $_GET['username'];
+        $password = $_GET['password'];
         $user = User::search($username);
-        // $id = $user->getId();
         $courses = $user->getCourses();
 
-        if($user == NULL) {
-            return $app['twig']->render("index.html.twig", array());
-        } else {
+        if(($username == $user->getName()) && ($password == $user->getPassword())) {
+            $user->setSignedIn(1);
             return $app['twig']->render("dashboard.html.twig", array(
                 'user' => $user,
                 'name' => $user->getName(),
-                'id' => $user->getId(),
                 'courses' => $courses
             ));
+        } else {
+            return $app['twig']->render("index.html.twig", array());
         }
+    });
+    //Show Dashboard
+    $app->get("/show_dashboard/{id}", function($id) use($app) {
+        $user = User::find($id);
+        return $app['twig']->render("dashboard.html.twig", array(
+            'user' => $user,
+            'name' => $user->getName(),
+            'courses' => $user->getCourses()
+        ));
     });
 
     //Edit user
