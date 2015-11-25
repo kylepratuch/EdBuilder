@@ -95,7 +95,7 @@
         $new_name = $_POST['new_name'];
         $new_password = $_POST['new_password'];
         $new_email = $_POST['new_email'];
-        $user->updateUser($new_name, $password, $new_email);
+        $user->updateUser($new_name, $new_password, $new_email);
 
         return $app['twig']->render("dashboard.html.twig", array(
             'user' => $user,
