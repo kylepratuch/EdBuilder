@@ -9,8 +9,8 @@
             <label name="new_name">New Username</label>
             <input name="new_name" type="text" value={{user.getName}} required />
 
-            <label name="new_password">New Password</label>
-            <input name="new_password" type="text" value={{user.getPassword}} required />
+            <!-- <label name="new_password">New Password</label> -->
+            <input name="new_password" type="hidden" value={{user.getPassword}} required />
 
             <label name="new_email">New Email</label>
             <input name="new_email" type="text" value={{user.getEmail}} required />

@@ -46,7 +46,7 @@
     });
 
     $app->post("/user_sign_up", function() use($app) {
-        $new_user = new User($_POST['username'], $_POST['email'], $_POST['password']);
+        $new_user = new User($_POST['username'], password_hash($_POST['password'], PASSWORD_DEFAULT), $_POST['email']);
         $new_user->save();
 
         return $app['twig']->render("sign_up_confirm.html.twig");
@@ -58,14 +58,17 @@
         $username = $_GET['username'];
         $password = $_GET['password'];
         $user = User::search($username);
-        $courses = $user->getCourses();
+        // $courses = $user->getCourses();
 
-        if(($username == $user->getName()) && ($password == $user->getPassword())) {
+        $hash = $user->getHash();
+        var_dump($hash);
+
+        if(($username == $user->getName()) && (password_verify($password, $hash))) {
             $user->setSignedIn(1);
             return $app['twig']->render("dashboard.html.twig", array(
                 'user' => $user,
                 'name' => $user->getName(),
-                'courses' => $courses
+                'courses' => $user->getCourses()
             ));
         } else {
             return $app['twig']->render("index.html.twig", array());
@@ -94,7 +97,7 @@
         $new_name = $_POST['new_name'];
         $new_password = $_POST['new_password'];
         $new_email = $_POST['new_email'];
-        $user->updateUser($new_name, $new_email, $password);
+        $user->updateUser($new_name, $password, $new_email);
 
         return $app['twig']->render("dashboard.html.twig", array(
             'user' => $user,
@@ -154,7 +157,7 @@
     //Delete a course
     $app->get("/delete_course/{user_id}/{course_id}", function($user_id, $course_id) use($app) {
         $course = Course::find($course_id);
-        //Deleting a course should also deletes orphaned units
+        //Deleting a course should also delete orphaned units
         $units = $course->getUnits();
         foreach($units as $unit) {
             $unit->delete();
@@ -222,7 +225,7 @@
         $unit = Unit::find($unit_id);
         $course = Course::find($course_id);
 
-        //Deleting a unit should also deletes orphaned lessons
+        //Deleting a unit should also delete orphaned lessons
         $lessons = $unit->getLessons();
         foreach($lessons as $lesson) {
             $lesson->delete();

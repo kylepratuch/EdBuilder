@@ -8,12 +8,9 @@
         private $signed_in;
         private $id;
 
-
         function __construct($name, $password, $email, $signed_in = 0, $id = null)
         {
             $this->name = $name;
-            //Will worry about password hashing later.
-            // $passwordHash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
             $this->password = $password;
             $this->email = $email;
             $this->signed_in = $signed_in;
@@ -40,6 +37,14 @@
         function getPassword()
         {
             return $this->password;
+        }
+
+        function getHash()
+        {
+            $query = $GLOBALS['DB']->query("SELECT password FROM users WHERE name = '{$this->getName()}';");
+            $pass = $query->fetch(PDO::FETCH_ASSOC);
+            $hash = $pass['password'];
+            return $hash;
         }
 
         //$email setter and getter
@@ -69,12 +74,6 @@
         {
             return $this->id;
         }
-
-        // //Create a new User - use this for password hashing?
-        // function createUser()
-        // {
-        //
-        // }
 
         //Save a user to the database
         function save()
