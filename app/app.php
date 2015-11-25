@@ -54,14 +54,12 @@
 
     //=========== User Dashboard Routes ================
     //Sign In
-    $app->get("/sign_in", function() use($app) {
-        $username = $_GET['username'];
-        $password = $_GET['password'];
+    $app->post("/sign_in", function() use($app) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
         $user = User::search($username);
-        // $courses = $user->getCourses();
 
         $hash = $user->getHash();
-        var_dump($hash);
 
         if(($username == $user->getName()) && (password_verify($password, $hash))) {
             $user->setSignedIn(1);
