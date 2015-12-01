@@ -4,17 +4,64 @@
         <title>EdBuilder</title>
     </head>
     <body>
-        <div class="container">
-            <p>Title: {{ lesson.getTitle }}</p>
-            <p>Objective: {{ lesson.getObjective }}</p>
-            <p>Materials: {{ lesson.getMaterials }}</p>
-            <p>Body: {{ lesson.getBody }}</p>
+        <!-- Navbar -->
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="true">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">EdBuilder</a>
+            </div>
 
-            <a href="/show_lesson_edit/{{ lesson.getId }}">Edit this lesson</a>
-            <form action="/delete_lesson/{{ unit.getId }}/{{ lesson.getId }}">
-                <input name="_method" type="hidden" value="delete">
-                <button type="submit">Delete Lesson</button>
-            </form>
-        </div>    
+            <div class="navbar-collapse collapse in" id="navbar-collapse" aria-expanded="true">
+                <ul class="nav navbar-nav">
+                    <li><a href="/show_dashboard/{{user.getId}}">Your Courses</a></li>
+                    <li><a href="/show_course/{{course.getId}}">{{course.getTitle}} Units</a></li>
+                    <li><a href="/show_unit/{{unit.getId}}">{{unit.getTitle}} Lessons</a></li>
+                </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Logout</a></li>
+                <li><a href="/about">About</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- End Navbar -->
+
+        <div class="container">
+            <!-- Jumbo -->
+            <div class="jumbotron">
+                <p><strong>Lesson Title:</strong> {{ lesson.getTitle }}</p>
+                <p><strong>Objective:</strong> {{ lesson.getObjective }}</p>
+                <p><strong>Materials:</strong> {{ lesson.getMaterials }}</p>
+                <p><strong>Narrative:</strong> {{ lesson.getBody }}</p>
+
+                <form action="/delete_lesson/{{ unit.getId }}/{{ lesson.getId }}">
+                    <!-- Edit link is inside form for formatting purposes -->
+                    <a class="btn btn-warning" href="/show_lesson_edit/{{ lesson.getId }}">Edit this lesson</a>
+
+                    <input name="_method" type="hidden" value="delete">
+                    <button type="submit" class="btn btn-danger">Delete this Lesson</button>
+                </form>
+            </div>
+            <!-- End Jumbo -->
+
+            <!-- <div class="jumbotron">
+                <p>Title: {{ lesson.getTitle }}</p>
+                <p>Objective: {{ lesson.getObjective }}</p>
+                <p>Materials: {{ lesson.getMaterials }}</p>
+                <p>Body: {{ lesson.getBody }}</p>
+
+                <form action="/delete_lesson/{{ unit.getId }}/{{ lesson.getId }}">
+                <a href="/show_lesson_edit/{{ lesson.getId }}">Edit this lesson</a>
+                    <input name="_method" type="hidden" value="delete">
+                    <button type="submit">Delete Lesson</button>
+                </form>
+            </div> -->
+        </div>
     </body>
 </html>

@@ -298,11 +298,20 @@
     //Show lesson
     $app->get("/show_lesson/{id}", function($id) use($app) {
         $lesson = Lesson::find($id);
+
         $unit_id = $lesson->getUnitId();
+        $unit = Unit::find($unit_id);
+
+        $course_id = $unit->getCourseId();
+        $course = Course::find($course_id);
+
+        $user_id = $course->getUserId();
 
         return $app['twig']->render("lesson.html.twig", array(
             'lesson' => $lesson,
-            'unit' => Unit::find($unit_id)
+            'unit' => $unit,
+            'course' => $course,
+            'user' => User::find($user_id)
         ));
     });
 

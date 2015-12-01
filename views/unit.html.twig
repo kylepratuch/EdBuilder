@@ -35,7 +35,7 @@
 
             <!-- Jumbo -->
             <div class="jumbotron">
-                <p><strong>Title:</strong> {{ unit.getTitle }}</p>
+                <p><strong>Unit Title:</strong> {{ unit.getTitle }}</p>
                 <p><strong>Description:</strong> {{ unit.getDescription }}</p>
 
                 <form action="/delete_unit/{{ course.getId }}/{{ unit.getId }}">
@@ -62,23 +62,6 @@
             </div>
             <!-- End lessons list -->
 
-            <!-- <h3>Add a new lesson for this unit:</h3>
-            <form action="/add_lesson/{{ course.getId }}/{{ unit.getId }}" method="post">
-                <label name="lesson_title">Title</label>
-                <input name="lesson_title" type="text" />
-
-                <label name="lesson_objective">Objective</label>
-                <input name="lesson_objective" type="text" />
-
-                <label name="lesson_materials">Materials Needed</label>
-                <input name="lesson_materials" type="text" />
-
-                <label name="lesson_body">Write your lesson procedure here:</label>
-                <textarea name="lesson_body"></textarea>
-
-                <button type="submit">Add</button>
-            </form> -->
-
             <!-- Add lesson form -->
             <div class="well">
                 <form class="form-horizontal" action="/add_lesson/{{ course.getId }}/{{unit.getId}}" method="post">
@@ -103,7 +86,7 @@
                             <label class="control-label col-lg-2" for="lesson_body">Narrative</label>
                             <div class="col-lg-10">
                                 <textarea class="form-control" rows="10" name="lesson_body" type="text"></textarea>
-                                <span class="help-block">Narrate your lesson here. For now, please avoid semicolons and apostrophes.</span>
+                                <span class="help-block">Narrate your lesson here. Be aware that formatting isn't saved yet. It's on the way, though!</span>
                             </div>
                         </div>
                         <div class="form-group">
