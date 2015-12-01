@@ -4,21 +4,73 @@
         <title>EdBuilder</title>
     </head>
     <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="true">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">EdBuilder</a>
+            </div>
+
+
+            <div class="navbar-collapse collapse in" id="navbar-collapse" aria-expanded="true">
+                <ul class="nav navbar-nav">
+                    <li><a href="/show_dashboard/{{user.getId}}">Courses</a></li>
+                </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Logout</a></li>
+                <li><a href="/about">About</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
         <div class="container">
-            <form action="edit_user/{{user.getId}}" method="post">
+            <!-- <form action="edit_user/{{user.getId}}" method="post">
                 <input name="_method" type="hidden" value="patch" />
 
                 <label name="new_name">New Username</label>
                 <input name="new_name" type="text" value={{user.getName}} required />
 
-                <!-- <label name="new_password">New Password</label> -->
                 <input name="new_password" type="hidden" value={{user.getPassword}} required />
 
                 <label name="new_email">New Email</label>
                 <input name="new_email" type="text" value={{user.getEmail}} required />
 
                 <button type="submit">Update</button>
-            </form>
-        </div>    
+            </form> -->
+
+            <div class="well">
+                <form class="form-horizontal" action="/edit_user/{{user.getId}}" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <legend>Edit your information:</legend>
+                            <input name="_method" type="hidden" value="patch" />
+
+                            <label class="control-label col-lg-2" for="new_name">New Username</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="new_name" type="text" value={{user.getName}} required />
+                            </div>
+
+                            <input name="new_password" type="hidden" value={{user.getPassword}} required />
+
+                            <label class="control-label col-lg-2" for="new_email">New Email</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="new_email" type="text" value={{user.getEmail}} required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-warning btn-lg">Update</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

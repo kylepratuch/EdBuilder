@@ -36,13 +36,9 @@
             <div class="well">
                 <h3>Your courses:</h3>
                 {% if courses is not empty %}
-                <!-- <ul> -->
                     {% for course in courses %}
-                    <!-- <li> -->
                         <a class="btn btn-default btn-lg btn-block" href="/show_course/{{ course.getId }}">{{ course.getTitle }}</a>
-                    <!-- </li> -->
                     {% endfor %}
-                <!-- </ul> -->
                 {% else %}
                     <p>You don't have any courses yet!</p>
                 {% endif %}

@@ -95,7 +95,7 @@
         ));
     });
 
-    $app->patch("/show_edit/edit_user/{id}", function($id) use($app) {
+    $app->patch("/edit_user/{id}", function($id) use($app) {
         $user = User::find($id);
         $new_name = $_POST['new_name'];
         $new_password = $_POST['new_password'];
