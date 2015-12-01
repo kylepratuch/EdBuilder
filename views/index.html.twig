@@ -5,20 +5,60 @@
         <title>EdBuilder</title>
     </head>
     <body>
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">EdBuilder</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/about">About</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
         <div class="container">
-            <p>Log in to view your account:</p>
+            <div class="jumbotron">
+              <h1>Welcome to EdBuilder.</h1>
+              <p>EdBuilder seeks to streamline lesson planning and curriculum organization for any educator, anywhere.</p>
+              <p><a href="/about" class="btn btn-primary btn-lg">Learn more</a></p>
+            </div>
 
-            <form action="/sign_in" method="post">
-                <label name = "username">Username</label>
-                <input name = "username" type = "text" />
 
-                <label name = "password">Password</label>
-                <input name = "password" type = "password" />
+            <div class="well">
+                <form class="form-horizontal" action="/sign_in" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <legend>Sign in to your account:</legend>
+                            <label class="control-label col-lg-2" for="username">Username</label>
+                            <div class="col-lg-10">
+                                <input name="username" type="text" class="form-control" placeholder="Username"/>
+                            </div>
 
-                <button type = "submit">Log In</button>
-            </form>
+                            <label class="control-label col-lg-2" for="password">Password</label>
+                            <div class="col-lg-10">
+                                <input name="password" type="text" class="form-control" placeholder="Password"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
 
-            <a href = "/sign_up">Don't have an account? Sign up here!</a>
-        </div>    
+                <div class="col-lg-10 col-lg-offset-1">
+                    <a href = "/sign_up">Don't have an account? Sign up here!</a>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
