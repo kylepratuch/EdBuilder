@@ -5,40 +5,77 @@
     </head>
 
     <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="true">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">EdBuilder</a>
+            </div>
+
+            <div class="navbar-collapse collapse in" id="navbar-collapse" aria-expanded="true">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Logout</a></li>
+                <li><a href="/about">About</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
         <div class="container">
-            <h2>Welcome to your dashboard, {{ user.getName }}!</h2>
+            <div class="jumbotron">
+                <h2>Welcome to your dashboard, {{ user.getName }}!</h2>
 
-            <a href="/show_edit/{{user.getId}}">Edit your profile</a>
+                <p><a href="/show_edit/{{user.getId}}" class="btn btn-warning">Edit your profile</a></p>
+            </div>
 
-            <a href="/">Logout</a><br>
+            <div class="well">
+                <h3>Your courses:</h3>
+                {% if courses is not empty %}
+                <!-- <ul> -->
+                    {% for course in courses %}
+                    <!-- <li> -->
+                        <a class="btn btn-default btn-lg btn-block" href="/show_course/{{ course.getId }}">{{ course.getTitle }}</a>
+                    <!-- </li> -->
+                    {% endfor %}
+                <!-- </ul> -->
+                {% else %}
+                    <p>You don't have any courses yet!</p>
+                {% endif %}
+            </div>
 
-            <h3>Your courses:</h3>
-            {% if courses is not empty %}
-            <ul>
-                {% for course in courses %}
-                <li>
-                    <a href="/show_course/{{ course.getId }}">{{ course.getTitle }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-                <p>You don't have any courses yet!</p>
-            {% endif %}
+            <div class="well">
+                <form class="form-horizontal" action="/add_course/{{user.getId}}" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <legend>Add a new course:</legend>
+                            <label class="control-label col-lg-2" for="course_title">Title</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="course_title" type="text" />
+                            </div>
 
-            <h4>Add a new course:</h4>
-            <form action="/add_course/{{user.getId}}" method="post">
-                <label name="course_title">Title</label>
-                <input name="course_title" type="text" />
+                            <label class="control-label col-lg-2" for="course_subject">Subject</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="course_subject" type="text" />
+                            </div>
 
-                <label name="course_subject">Subject</label>
-                <input name="course_subject" type="text" />
-
-                <label name="course_description">Description</label>
-                <input name="course_description" type="text" />
-
-                <button type="submit">Add</button>
-            </div>    
+                            <label class="control-label col-lg-2" for="course_description">Description</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="course_description" type="text" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-success btn-lg">+</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
     </body>
-
-
 </html>

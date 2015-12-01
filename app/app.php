@@ -59,15 +59,19 @@
         $password = $_POST['password'];
         $user = User::search($username);
 
-        $hash = $user->getHash();
+        if($user != NULL) {
+            $hash = $user->getHash();
 
-        if(($username == $user->getName()) && (password_verify($password, $hash))) {
-            $user->setSignedIn(1);
-            return $app['twig']->render("dashboard.html.twig", array(
-                'user' => $user,
-                'name' => $user->getName(),
-                'courses' => $user->getCourses()
-            ));
+            if(($username == $user->getName()) && (password_verify($password, $hash))) {
+                $user->setSignedIn(1);
+                return $app['twig']->render("dashboard.html.twig", array(
+                    'user' => $user,
+                    'name' => $user->getName(),
+                    'courses' => $user->getCourses()
+                ));
+            } else {
+                return $app['twig']->render("index.html.twig", array());
+            }
         } else {
             return $app['twig']->render("index.html.twig", array());
         }
