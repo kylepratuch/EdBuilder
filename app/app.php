@@ -202,12 +202,17 @@
     //Show unit
     $app->get("/show_unit/{id}", function($id) use($app) {
         $unit = Unit::find($id);
+
         $course_id = $unit->getCourseId();
+        $course = Course::find($course_id);
+
+        $user_id = $course->getUserId();
 
         return $app['twig']->render("unit.html.twig", array(
             'unit' => $unit,
             'lessons' => $unit->getLessons(),
-            'course' => Course::find($course_id)
+            'course' => $course,
+            'user' => User::find($user_id)
         ));
     });
 

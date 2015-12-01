@@ -4,8 +4,35 @@
         <title>EdBuilder</title>
     </head>
     <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="true">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">EdBuilder</a>
+            </div>
+
+            <div class="navbar-collapse collapse in" id="navbar-collapse" aria-expanded="true">
+                <ul class="nav navbar-nav">
+                    <li><a href="/show_dashboard/{{user.getId}}">Courses</a></li>
+                    <li><a href="/show_course/{{course.getId}}">Units</a></li>
+                </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Logout</a></li>
+                <li><a href="/about">About</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- End Navbar -->
+
         <div class="container">
-            <p>Title: {{ unit.getTitle }}</p>
+            <!-- <p>Title: {{ unit.getTitle }}</p>
             <p>Description: {{ unit.getDescription }}</p>
 
             <a href="/show_unit_edit/{{ unit.getId }}">Edit this unit</a>
@@ -13,9 +40,23 @@
                 <input name="_method" type="hidden" value="delete">
                 <button type="submit">Delete Unit</button>
             </form>
-            <p>* Deleting a unit currently deletes all lessons tied to it! *</p>
+            <p>* Deleting a unit currently deletes all lessons tied to it! *</p> -->
 
-            <a href="/show_course/{{ course.getId }}">Back to course view.</a>
+            <!-- Jumbo -->
+            <div class="jumbotron">
+                <p><strong>Title:</strong> {{ unit.getTitle }}</p>
+                <p><strong>Description:</strong> {{ unit.getDescription }}</p>
+
+                <form action="/delete_unit/{{ course.getId }}/{{ unit.getId }}">
+                    <!-- Edit link is inside form for formatting purposes -->
+                    <a class="btn btn-warning" href="/show_unit_edit/{{ unit.getId }}">Edit this course</a>
+
+                    <input name="_method" type="hidden" value="delete">
+                    <button type="submit" class="btn btn-danger">Delete this Unit</button>
+                </form>
+                <p><strong>Heads up!</strong> Deleting a unit will delete its lessons as well.</p>
+            </div>
+            <!-- End Jumbo -->
 
             <h3>Lessons in this unit:</h3>
             {% if lessons is not empty %}
@@ -46,6 +87,6 @@
 
                 <button type="submit">Add</button>
             </form>
-        </div>    
+        </div>
     </body>
 </html>
