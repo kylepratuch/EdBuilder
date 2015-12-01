@@ -30,19 +30,6 @@
           </div>
         </nav>
         <div class="container">
-            <!-- <form action="edit_user/{{user.getId}}" method="post">
-                <input name="_method" type="hidden" value="patch" />
-
-                <label name="new_name">New Username</label>
-                <input name="new_name" type="text" value={{user.getName}} required />
-
-                <input name="new_password" type="hidden" value={{user.getPassword}} required />
-
-                <label name="new_email">New Email</label>
-                <input name="new_email" type="text" value={{user.getEmail}} required />
-
-                <button type="submit">Update</button>
-            </form> -->
 
             <div class="well">
                 <form class="form-horizontal" action="/edit_user/{{user.getId}}" method="post">

@@ -4,34 +4,65 @@
         <title>EdBuilder</title>
     </head>
     <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="true">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">EdBuilder</a>
+            </div>
+
+
+            <div class="navbar-collapse collapse in" id="navbar-collapse" aria-expanded="true">
+                <ul class="nav navbar-nav">
+                    <li><a href="/show_dashboard/{{user.getId}}">Courses</a></li>
+                </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Logout</a></li>
+                <li><a href="/about">About</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- End Nav -->
+
         <div class="container">
-            <p>Title: {{ course.getTitle }}</p>
-            <p>Subject: {{ course.getSubject }}</p>
-            <p>Description: {{ course.getDescription }}</p>
+            <!-- Jumbo -->
+            <div class="jumbotron">
+                <p><strong>Title:</strong> {{ course.getTitle }}</p>
+                <p><strong>Subject:</strong> {{ course.getSubject }}</p>
+                <p><strong>Description:</strong> {{ course.getDescription }}</p>
 
-            <a href="/show_course_edit/{{ course.getId }}">Edit this course</a>
-            <form action="/delete_course/{{ user.getId }}/{{ course.getId }}">
-                <input name="_method" type="hidden" value="delete">
-                <button type="submit">Delete Course</button>
-            </form>
-            <p>* Deleting a course currently deletes all units tied to it! *</p>
+                <form action="/delete_course/{{ user.getId }}/{{ course.getId }}">
+                    <!-- Edit link is inside form for formatting purposes -->
+                    <a class="btn btn-warning" href="/show_course_edit/{{ course.getId }}">Edit this course</a>
 
-            <a href="/show_dashboard/{{ user.getId }}">Back to your dashboard.</a>
+                    <input name="_method" type="hidden" value="delete">
+                    <button type="submit" class="btn btn-danger">Delete This Course</button>
+                </form>
+                <p><strong>Heads up!</strong> Deleting a course will delete its units as well.</p>
+            </div>
+            <!-- End Jumbo -->
 
-            <h3>Units in this course:</h3>
-            {% if units is not empty %}
-            <ul>
-                {% for unit in units %}
-                <li>
-                    <a href="/show_unit/{{ unit.getId }}">{{ unit.getTitle }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-                <p>You don't have any units yet!</p>
-            {% endif %}
+            <!-- Units List -->
+            <div class="well">
+                <h3>Units in this course:</h3>
+                {% if units is not empty %}
+                    {% for unit in units %}
+                        <a class="btn btn-default btn-lg btn-block" href="/show_unit/{{ unit.getId }}">{{ unit.getTitle }}</a>
+                    {% endfor %}
+                {% else %}
+                    <p>You don't have any units yet!</p>
+                {% endif %}
+            </div>
+            <!-- End Units List -->
 
-            <h3>Add a new unit for this course:</h3>
+            <!-- <h3>Add a new unit for this course:</h3>
             <form action="/add_unit/{{ user.getId }}/{{ course.getId }}" method="post">
                 <label name="unit_title">Title</label>
                 <input name="unit_title" type="text" />
@@ -40,6 +71,32 @@
                 <input name="unit_description" type="text" />
 
                 <button type="submit">Add</button>
+            </div> -->
+
+            <!-- Add unit form -->
+            <div class="well">
+                <form class="form-horizontal" action="/add_unit/{{ user.getId }}/{{course.getId}}" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <legend>Add a new unit:</legend>
+                            <label class="control-label col-lg-2" for="unit_title">Title</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="unit_title" type="text" />
+                            </div>
+
+                            <label class="control-label col-lg-2" for="unit_description">Description</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="unit_description" type="text" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-success btn-lg">+</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
+            <!-- End add unit form -->
     </body>
 </html>
