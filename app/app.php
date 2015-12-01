@@ -168,13 +168,15 @@
         $user = User::find($user_id);
         $course = Course::find($course_id);
         //Deleting a course should also delete orphaned units
-        $units = $course->getUnits();
 
+        $units = $course->getUnits();
+        
         if(count($units) > 0){
             foreach($units as $unit) {
                 $unit->delete();
             }
         }
+
 
         $course->delete();
 
@@ -256,14 +258,14 @@
         $unit = Unit::find($unit_id);
         $course = Course::find($course_id);
 
-        $course_units = $course->getUnits();
-
         //Deleting a unit should also delete orphaned lessons
         $lessons = $unit->getLessons();
         foreach($lessons as $lesson) {
             $lesson->delete();
         }
         $unit->delete();
+
+        $course_units = $course->getUnits();
 
         $user_id = $course->getUserId();
 
