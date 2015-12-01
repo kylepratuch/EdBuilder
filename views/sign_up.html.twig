@@ -4,21 +4,58 @@
         <title>EdBuilder</title>
     </head>
     <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">EdBuilder</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Sign In</a></li>
+                <li><a href="/about">About</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
         <div class="container">
-            <p>Sign up to create a new account:</p>
+            <div class="well">
+                <form class="form-horizontal" action="/user_sign_up" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <legend>Create a new account:</legend>
+                            <label class="control-label col-lg-2" for="username">Username</label>
+                            <div class="col-lg-10">
+                                <input name="username" type="text" class="form-control" placeholder="Username" required/>
+                            </div>
 
-            <form action="/user_sign_up" method="post">
-                <label name="username">Username</label>
-                <input name="username" type="text" />
+                            <label class="control-label col-lg-2" for="username">Email</label>
+                            <div class="col-lg-10">
+                                <input name="email" type="text" class="form-control" placeholder="Email" required/>
+                            </div>
 
-                <label name="email">Email</label>
-                <input name="email" type="text" />
+                            <label class="control-label col-lg-2" for="password">Password</label>
+                            <div class="col-lg-10">
+                                <input name="password" type="password" class="form-control" placeholder="Password" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-success">Create</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
 
-                <label name="password">Password</label>
-                <input name="password" type="text" />
-
-                <button type="submit">Sign Up</button>
-            </form>
-        </div>    
+            </div>
+        </div>
     </body>
 </html>
