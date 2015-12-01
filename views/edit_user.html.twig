@@ -17,7 +17,6 @@
                 <a class="navbar-brand" href="/">EdBuilder</a>
             </div>
 
-
             <div class="navbar-collapse collapse in" id="navbar-collapse" aria-expanded="true">
                 <ul class="nav navbar-nav">
                     <li><a href="/show_dashboard/{{user.getId}}">Courses</a></li>
@@ -29,8 +28,10 @@
             </div>
           </div>
         </nav>
-        <div class="container">
+        <!-- End Navbar -->
 
+        <div class="container">
+            <!-- Edit User Form -->
             <div class="well">
                 <form class="form-horizontal" action="/edit_user/{{user.getId}}" method="post">
                     <fieldset>
@@ -58,6 +59,7 @@
                     </fieldset>
                 </form>
             </div>
+            <!-- End edit user form -->
         </div>
     </body>
 </html>

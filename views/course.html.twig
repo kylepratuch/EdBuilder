@@ -62,17 +62,6 @@
             </div>
             <!-- End Units List -->
 
-            <!-- <h3>Add a new unit for this course:</h3>
-            <form action="/add_unit/{{ user.getId }}/{{ course.getId }}" method="post">
-                <label name="unit_title">Title</label>
-                <input name="unit_title" type="text" />
-
-                <label name="unit_description">Description</label>
-                <input name="unit_description" type="text" />
-
-                <button type="submit">Add</button>
-            </div> -->
-
             <!-- Add unit form -->
             <div class="well">
                 <form class="form-horizontal" action="/add_unit/{{ user.getId }}/{{course.getId}}" method="post">
@@ -98,5 +87,6 @@
                 </form>
             </div>
             <!-- End add unit form -->
+        </div>    
     </body>
 </html>

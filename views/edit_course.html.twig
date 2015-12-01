@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
     <head>
         <link rel="stylesheet" href="../../css/bootstrap.css">
         <title>EdBuilder</title>
@@ -19,6 +19,75 @@
 
                 <button type="submit">Update</button>
             </form>
-        </div>    
+        </div>
+    </body>
+</html> -->
+
+<html>
+    <head>
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <title>EdBuilder</title>
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="true">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">EdBuilder</a>
+            </div>
+
+            <div class="navbar-collapse collapse in" id="navbar-collapse" aria-expanded="true">
+                <ul class="nav navbar-nav">
+                    <li><a href="/show_dashboard/{{user.getId}}">Courses</a></li>
+                    <li><a href="/show_course/{{course.getId}}">Units</a></li>
+                </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Logout</a></li>
+                <li><a href="/about">About</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- End Navbar -->
+
+        <div class="container">
+            <!-- Edit User Form -->
+            <div class="well">
+                <form class="form-horizontal" action="edit_course/{{course.getId}}" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <legend>Edit course information:</legend>
+                            <input name="_method" type="hidden" value="patch" />
+
+                            <label class="control-label col-lg-2" for="new_title">New Title</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="new_title" type="text" value={{course.getTitle}} required />
+                            </div>
+
+                            <label class="control-label col-lg-2" for="new_subject">New Subject</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="new_subject" type="text" value={{course.getSubject}} required />
+                            </div>
+                            <label class="control-label col-lg-2" for="new_description">New Description</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="new_description" type="text" value={{course.getDescription}} required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-warning btn-lg">Update</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <!-- End edit user form -->
+        </div>
     </body>
 </html>

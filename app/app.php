@@ -139,8 +139,11 @@
     //Edit a course
     $app->get("/show_course_edit/{id}", function($id) use($app) {
         $course = Course::find($id);
+        $user_id = $course->getUserId();
+
         return $app['twig']->render("edit_course.html.twig", array(
             'course' => $course,
+            'user' => User::find($user_id)
         ));
     });
 
@@ -151,9 +154,12 @@
         $new_description = $_POST['new_description'];
         $course->updateCourse($new_title, $new_subject, $new_description);
 
+        $user_id = $course->getUserId();
+
         return $app['twig']->render("course.html.twig", array(
             'course' => $course,
-            'units' => $course->getUnits()
+            'units' => $course->getUnits(),
+            'user' => User::find($user_id)
         ));
     });
 
