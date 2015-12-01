@@ -19,8 +19,8 @@
 
             <div class="navbar-collapse collapse in" id="navbar-collapse" aria-expanded="true">
                 <ul class="nav navbar-nav">
-                    <li><a href="/show_dashboard/{{user.getId}}">Courses</a></li>
-                    <li><a href="/show_course/{{course.getId}}">Units</a></li>
+                    <li><a href="/show_dashboard/{{user.getId}}">Your Courses</a></li>
+                    <li><a href="/show_course/{{course.getId}}">{{course.getTitle}} Units</a></li>
                 </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="/">Logout</a></li>
@@ -32,15 +32,6 @@
         <!-- End Navbar -->
 
         <div class="container">
-            <!-- <p>Title: {{ unit.getTitle }}</p>
-            <p>Description: {{ unit.getDescription }}</p>
-
-            <a href="/show_unit_edit/{{ unit.getId }}">Edit this unit</a>
-            <form action="/delete_unit/{{ course.getId }}/{{ unit.getId }}">
-                <input name="_method" type="hidden" value="delete">
-                <button type="submit">Delete Unit</button>
-            </form>
-            <p>* Deleting a unit currently deletes all lessons tied to it! *</p> -->
 
             <!-- Jumbo -->
             <div class="jumbotron">
@@ -49,7 +40,7 @@
 
                 <form action="/delete_unit/{{ course.getId }}/{{ unit.getId }}">
                     <!-- Edit link is inside form for formatting purposes -->
-                    <a class="btn btn-warning" href="/show_unit_edit/{{ unit.getId }}">Edit this course</a>
+                    <a class="btn btn-warning" href="/show_unit_edit/{{ unit.getId }}">Edit this unit</a>
 
                     <input name="_method" type="hidden" value="delete">
                     <button type="submit" class="btn btn-danger">Delete this Unit</button>
@@ -58,20 +49,20 @@
             </div>
             <!-- End Jumbo -->
 
-            <h3>Lessons in this unit:</h3>
-            {% if lessons is not empty %}
-            <ul>
-                {% for lesson in lessons %}
-                <li>
-                    <a href="/show_lesson/{{ lesson.getId }}">{{ lesson.getTitle }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-                <p>You don't have any lessons yet!</p>
-            {% endif %}
+            <!-- Lessons list -->
+            <div class="well">
+                <h3>Lessons in this unit:</h3>
+                {% if lessons is not empty %}
+                    {% for lesson in lessons %}
+                        <a class="btn btn-default btn-lg btn-block" href="/show_lesson/{{ lesson.getId }}">{{ lesson.getTitle }}</a>
+                    {% endfor %}
+                {% else %}
+                    <p>You don't have any lessons yet!</p>
+                {% endif %}
+            </div>
+            <!-- End lessons list -->
 
-            <h3>Add a new lesson for this unit:</h3>
+            <!-- <h3>Add a new lesson for this unit:</h3>
             <form action="/add_lesson/{{ course.getId }}/{{ unit.getId }}" method="post">
                 <label name="lesson_title">Title</label>
                 <input name="lesson_title" type="text" />
@@ -86,7 +77,44 @@
                 <textarea name="lesson_body"></textarea>
 
                 <button type="submit">Add</button>
-            </form>
+            </form> -->
+
+            <!-- Add lesson form -->
+            <div class="well">
+                <form class="form-horizontal" action="/add_lesson/{{ course.getId }}/{{unit.getId}}" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <legend>Add a new lesson:</legend>
+                            <label class="control-label col-lg-2" for="lesson_title">Title</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="lesson_title" type="text" />
+                            </div>
+
+                            <label class="control-label col-lg-2" for="lesson_objective">Objective</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="lesson_objective" type="text" />
+                            </div>
+
+                            <label class="control-label col-lg-2" for="lesson_materials">Materials</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="lesson_materials" type="text" />
+                            </div>
+
+                            <label class="control-label col-lg-2" for="lesson_body">Narrative</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="10" name="lesson_body" type="text"></textarea>
+                                <span class="help-block">Narrate your lesson here. For now, please avoid semicolons and apostrophes.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-success btn-lg">+</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <!-- End add lesson form -->
         </div>
     </body>
 </html>

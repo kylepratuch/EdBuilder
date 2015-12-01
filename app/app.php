@@ -219,8 +219,16 @@
     //Edit a unit
     $app->get("/show_unit_edit/{id}", function($id) use($app) {
         $unit = Unit::find($id);
+
+        $course_id = $unit->getCourseId();
+        $course = Course::find($course_id);
+
+        $user_id = $course->getUserId();
+
         return $app['twig']->render("edit_unit.html.twig", array(
             'unit' => $unit,
+            'course' => $course,
+            'user' => User::find($user_id)
         ));
     });
 
@@ -231,11 +239,15 @@
         $unit->updateUnit($new_title, $new_description);
 
         $course_id = $unit->getCourseId();
+        $course = Course::find($course_id);
+
+        $user_id = $course->getUserId();
 
         return $app['twig']->render("unit.html.twig", array(
             'unit' => $unit,
             'lessons' => $unit->getLessons(),
-            'course' => Course::find($course_id)
+            'course' => $course,
+            'user' => User::find($user_id)
         ));
     });
 
@@ -243,6 +255,8 @@
     $app->get("/delete_unit/{course_id}/{unit_id}", function($course_id, $unit_id) use($app) {
         $unit = Unit::find($unit_id);
         $course = Course::find($course_id);
+
+        $course_units = $course->getUnits();
 
         //Deleting a unit should also delete orphaned lessons
         $lessons = $unit->getLessons();
@@ -255,7 +269,7 @@
 
         return $app['twig']->render("course.html.twig", array(
             'course' => Course::find($course_id),
-            'units' => $units,
+            'units' => $course_units,
             'user' => User::find($user_id)
 
         ));
@@ -268,10 +282,15 @@
 
         $unit = Unit::find($unit_id);
 
+        $course = Course::find($course_id);
+
+        $user_id = $course->getUserId();
+
         return $app['twig']->render("unit.html.twig", array(
             'unit' => $unit,
             'lessons' => $unit->getLessons(),
-            'course' => Course::find($course_id)
+            'course' => $course,
+            'user' => User::find($user_id)
         ));
     });
 

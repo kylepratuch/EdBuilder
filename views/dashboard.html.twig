@@ -26,13 +26,20 @@
             </div>
           </div>
         </nav>
+        <!-- End navbar -->
+
         <div class="container">
+
+            <!-- Jumbo -->
             <div class="jumbotron">
                 <h2>Welcome to your dashboard, {{ user.getName }}!</h2>
+                <p>Let's get to work! Select one of your existing courses, or create a brand new one.</p>
 
                 <p><a href="/show_edit/{{user.getId}}" class="btn btn-warning">Edit your profile</a></p>
             </div>
+            <!-- End jumbo -->
 
+            <!-- Courses list -->
             <div class="well">
                 <h3>Your courses:</h3>
                 {% if courses is not empty %}
@@ -43,6 +50,7 @@
                     <p>You don't have any courses yet!</p>
                 {% endif %}
             </div>
+            <!-- End courses list -->
 
             <!-- Add course form -->
             <div class="well">
