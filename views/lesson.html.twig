@@ -4,15 +4,17 @@
         <title>EdBuilder</title>
     </head>
     <body>
-        <p>Title: {{ lesson.getTitle }}</p>
-        <p>Objective: {{ lesson.getObjective }}</p>
-        <p>Materials: {{ lesson.getMaterials }}</p>
-        <p>Body: {{ lesson.getBody }}</p>
+        <div class="container">
+            <p>Title: {{ lesson.getTitle }}</p>
+            <p>Objective: {{ lesson.getObjective }}</p>
+            <p>Materials: {{ lesson.getMaterials }}</p>
+            <p>Body: {{ lesson.getBody }}</p>
 
-        <a href="/show_lesson_edit/{{ lesson.getId }}">Edit this lesson</a>
-        <form action="/delete_lesson/{{ unit.getId }}/{{ lesson.getId }}">
-            <input name="_method" type="hidden" value="delete">
-            <button type="submit">Delete Lesson</button>
-        </form>
+            <a href="/show_lesson_edit/{{ lesson.getId }}">Edit this lesson</a>
+            <form action="/delete_lesson/{{ unit.getId }}/{{ lesson.getId }}">
+                <input name="_method" type="hidden" value="delete">
+                <button type="submit">Delete Lesson</button>
+            </form>
+        </div>    
     </body>
 </html>

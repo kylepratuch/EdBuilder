@@ -4,16 +4,18 @@
         <title>EdBuilder</title>
     </head>
     <body>
-        <form action="edit_unit/{{unit.getId}}" method="post">
-            <input name="_method" type="hidden" value="patch" />
+        <div class="container">
+            <form action="edit_unit/{{unit.getId}}" method="post">
+                <input name="_method" type="hidden" value="patch" />
 
-            <label name="new_title">New Title</label>
-            <input name="new_title" type="text" value={{unit.getTitle}} required />
+                <label name="new_title">New Title</label>
+                <input name="new_title" type="text" value={{unit.getTitle}} required />
 
-            <label name="new_description">New Description</label>
-            <input name="new_description" type="text" value={{unit.getDescription}} required />
+                <label name="new_description">New Description</label>
+                <input name="new_description" type="text" value={{unit.getDescription}} required />
 
-            <button type="submit">Update</button>
-        </form>
+                <button type="submit">Update</button>
+            </form>
+        </div>    
     </body>
 </html>

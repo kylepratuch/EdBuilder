@@ -5,37 +5,39 @@
     </head>
 
     <body>
-        <h2>Welcome to your dashboard, {{ user.getName }}!</h2>
+        <div class="container">
+            <h2>Welcome to your dashboard, {{ user.getName }}!</h2>
 
-        <a href="/show_edit/{{user.getId}}">Edit your profile</a>
+            <a href="/show_edit/{{user.getId}}">Edit your profile</a>
 
-        <a href="/">Logout</a><br>
+            <a href="/">Logout</a><br>
 
-        <h3>Your courses:</h3>
-        {% if courses is not empty %}
-        <ul>
-            {% for course in courses %}
-            <li>
-                <a href="/show_course/{{ course.getId }}">{{ course.getTitle }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-            <p>You don't have any courses yet!</p>
-        {% endif %}
+            <h3>Your courses:</h3>
+            {% if courses is not empty %}
+            <ul>
+                {% for course in courses %}
+                <li>
+                    <a href="/show_course/{{ course.getId }}">{{ course.getTitle }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>You don't have any courses yet!</p>
+            {% endif %}
 
-        <h4>Add a new course:</h4>
-        <form action="/add_course/{{user.getId}}" method="post">
-            <label name="course_title">Title</label>
-            <input name="course_title" type="text" />
+            <h4>Add a new course:</h4>
+            <form action="/add_course/{{user.getId}}" method="post">
+                <label name="course_title">Title</label>
+                <input name="course_title" type="text" />
 
-            <label name="course_subject">Subject</label>
-            <input name="course_subject" type="text" />
+                <label name="course_subject">Subject</label>
+                <input name="course_subject" type="text" />
 
-            <label name="course_description">Description</label>
-            <input name="course_description" type="text" />
+                <label name="course_description">Description</label>
+                <input name="course_description" type="text" />
 
-            <button type="submit">Add</button>
+                <button type="submit">Add</button>
+            </div>    
     </body>
 
 

@@ -26,7 +26,7 @@
 
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
-
+    
     //Basic get Calls
     $app->get("/", function() use($app) {
         return $app['twig']->render("index.html.twig", array());
@@ -72,7 +72,7 @@
             return $app['twig']->render("index.html.twig", array());
         }
     });
-    
+
     //Show Dashboard
     $app->get("/show_dashboard/{id}", function($id) use($app) {
         $user = User::find($id);

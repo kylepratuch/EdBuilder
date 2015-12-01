@@ -5,18 +5,20 @@
         <title>EdBuilder</title>
     </head>
     <body>
-        <p>Log in to view your account:</p>
+        <div class="container">
+            <p>Log in to view your account:</p>
 
-        <form action="/sign_in" method="post">
-            <label name = "username">Username</label>
-            <input name = "username" type = "text" />
+            <form action="/sign_in" method="post">
+                <label name = "username">Username</label>
+                <input name = "username" type = "text" />
 
-            <label name = "password">Password</label>
-            <input name = "password" type = "password" />
+                <label name = "password">Password</label>
+                <input name = "password" type = "password" />
 
-            <button type = "submit">Log In</button>
-        </form>
+                <button type = "submit">Log In</button>
+            </form>
 
-        <a href = "/sign_up">Don't have an account? Sign up here!</a>
+            <a href = "/sign_up">Don't have an account? Sign up here!</a>
+        </div>    
     </body>
 </html>
