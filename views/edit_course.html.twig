@@ -14,7 +14,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">EdBuilder</a>
+                <a class="navbar-brand" href="/show_dashboard/{{ user.getId }}">EdBuilder</a>
             </div>
 
             <div class="navbar-collapse collapse in" id="navbar-collapse" aria-expanded="true">
@@ -23,8 +23,8 @@
                     <li><a href="/show_course/{{course.getId}}">Units</a></li>
                 </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="/">Logout</a></li>
-                <li><a href="/about">About</a></li>
+                <li><a href="/logout/{{ user.getId }}">Logout</a></li>
+                <!-- <li><a href="/about">About</a></li> -->
               </ul>
             </div>
           </div>

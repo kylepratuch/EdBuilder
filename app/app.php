@@ -77,6 +77,15 @@
         }
     });
 
+    //Logout
+    $app->get("/logout/{id}", function($id) use($app) {
+        $user = User::find($id);
+
+        $user->setSignedIn(0);
+
+        return $app['twig']->render("index.html.twig", array());
+    });
+
     //Show Dashboard
     $app->get("/show_dashboard/{id}", function($id) use($app) {
         $user = User::find($id);
@@ -170,7 +179,7 @@
         //Deleting a course should also delete orphaned units
 
         $units = $course->getUnits();
-        
+
         if(count($units) > 0){
             foreach($units as $unit) {
                 $unit->delete();
