@@ -1,44 +1,45 @@
 <html>
     <head>
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../css/bootstrap.css">
         <title>EdBuilder</title>
     </head>
     <body>
-        <p>Title: {{ course.getTitle }}</p>
-        <p>Subject: {{ course.getSubject }}</p>
-        <p>Description: {{ course.getDescription }}</p>
+        <div class="container">
+            <p>Title: {{ course.getTitle }}</p>
+            <p>Subject: {{ course.getSubject }}</p>
+            <p>Description: {{ course.getDescription }}</p>
 
-        <a href="/show_course_edit/{{ course.getId }}">Edit this course</a>
-        <!-- <a href="/delete_course/{{ course.getId }}">Delete this course.</a> -->
-        <form action="/delete_course/{{ user.getId }}/{{ course.getId }}">
-            <input name="_method" type="hidden" value="delete">
-            <button type="submit">Delete Course</button>
-        </form>
-        <p>* Deleting a course currently deletes all units tied to it! *</p>
+            <a href="/show_course_edit/{{ course.getId }}">Edit this course</a>
+            <form action="/delete_course/{{ user.getId }}/{{ course.getId }}">
+                <input name="_method" type="hidden" value="delete">
+                <button type="submit">Delete Course</button>
+            </form>
+            <p>* Deleting a course currently deletes all units tied to it! *</p>
 
-        <a href="/show_dashboard/{{ user.getId }}">Back to your dashboard.</a>
+            <a href="/show_dashboard/{{ user.getId }}">Back to your dashboard.</a>
 
-        <h3>Units in this course:</h3>
-        {% if units is not empty %}
-        <ul>
-            {% for unit in units %}
-            <li>
-                <a href="/show_unit/{{ unit.getId }}">{{ unit.getTitle }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-            <p>You don't have any units yet!</p>
-        {% endif %}
+            <h3>Units in this course:</h3>
+            {% if units is not empty %}
+            <ul>
+                {% for unit in units %}
+                <li>
+                    <a href="/show_unit/{{ unit.getId }}">{{ unit.getTitle }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>You don't have any units yet!</p>
+            {% endif %}
 
-        <h3>Add a new unit for this course:</h3>
-        <form action="/add_unit/{{ user.getId }}/{{ course.getId }}" method="post">
-            <label name="unit_title">Title</label>
-            <input name="unit_title" type="text" />
+            <h3>Add a new unit for this course:</h3>
+            <form action="/add_unit/{{ user.getId }}/{{ course.getId }}" method="post">
+                <label name="unit_title">Title</label>
+                <input name="unit_title" type="text" />
 
-            <label name="unit_description">Description</label>
-            <input name="unit_description" type="text" />
+                <label name="unit_description">Description</label>
+                <input name="unit_description" type="text" />
 
-            <button type="submit">Add</button>
+                <button type="submit">Add</button>
+            </div>
     </body>
 </html>
