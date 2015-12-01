@@ -1,25 +1,3 @@
-<!-- <html>
-    <head>
-        <link rel="stylesheet" href="../../css/bootstrap.css">
-        <title>EdBuilder</title>
-    </head>
-    <body>
-        <div class="container">
-            <form action="edit_unit/{{unit.getId}}" method="post">
-                <input name="_method" type="hidden" value="patch" />
-
-                <label name="new_title">New Title</label>
-                <input name="new_title" type="text" value={{unit.getTitle}} required />
-
-                <label name="new_description">New Description</label>
-                <input name="new_description" type="text" value={{unit.getDescription}} required />
-
-                <button type="submit">Update</button>
-            </form>
-        </div>
-    </body>
-</html> -->
-
 <html>
     <head>
         <link rel="stylesheet" href="../../css/bootstrap.css">
@@ -55,7 +33,7 @@
         <!-- End Navbar -->
 
         <div class="container">
-            <!-- Edit course Form -->
+            <!-- Edit unit Form -->
             <div class="well">
                 <form class="form-horizontal" action="edit_unit/{{unit.getId}}" method="post">
                     <fieldset>
@@ -81,7 +59,7 @@
                     </fieldset>
                 </form>
             </div>
-            <!-- End edit course form -->
+            <!-- End edit unit form -->
         </div>
     </body>
 </html>

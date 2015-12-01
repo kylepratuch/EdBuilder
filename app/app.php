@@ -318,8 +318,20 @@
     //Edit a lesson
     $app->get("/show_lesson_edit/{id}", function($id) use($app) {
         $lesson = Lesson::find($id);
+
+        $unit_id = $lesson->getUnitId();
+        $unit = Unit::find($unit_id);
+
+        $course_id = $unit->getCourseId();
+        $course = Course::find($course_id);
+
+        $user_id = $course->getUserId();
+
         return $app['twig']->render("edit_lesson.html.twig", array(
             'lesson' => $lesson,
+            'unit' => $unit,
+            'course' => $course,
+            'user' => User::find($user_id)
         ));
     });
 
@@ -332,10 +344,18 @@
         $lesson->updateLesson($new_title, $new_objective, $new_materials, $new_body);
 
         $unit_id = $lesson->getUnitId();
+        $unit = Unit::find($unit_id);
+
+        $course_id = $unit->getCourseId();
+        $course = Course::find($course_id);
+
+        $user_id = $course->getUserId();
 
         return $app['twig']->render("lesson.html.twig", array(
             'lesson' => $lesson,
-            'unit' => Unit::find($unit_id)
+            'unit' => $unit,
+            'course' => $course,
+            'user' => User::find($user_id)
         ));
     });
 
@@ -343,18 +363,22 @@
     $app->get("/delete_lesson/{unit_id}/{lesson_id}", function($unit_id, $lesson_id) use($app) {
         $lesson = Lesson::find($lesson_id);
 
+        $unit_id = $lesson->getUnitId();
         $unit = Unit::find($unit_id);
-        $lessons = $unit->getLessons();
 
         $course_id = $unit->getCourseId();
+        $course = Course::find($course_id);
+
+        $user_id = $course->getUserId();
 
         $lesson->delete();
 
         return $app['twig']->render("unit.html.twig", array(
             'lesson' => $lesson,
             'unit' => $unit,
-            'lessons' => $lessons,
-            'course' => Course::find($course_id)
+            'lessons' => $unit->getLessons(),
+            'course' => $course,
+            'user' => User::find($user_id)
         ));
     });
 
