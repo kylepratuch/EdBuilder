@@ -64,10 +64,15 @@
         //Save a course to the database
         function save()
         {
+            //Handle apostrophes for MySQL statements first
+            $temp_title = str_replace(["'"], "''", $this->getTitle());
+            $temp_subject = str_replace(["'"], "''", $this->getSubject());
+            $temp_description = str_replace(["'"], "''", $this->getDescription());
+
             $GLOBALS['DB']->exec("INSERT INTO courses (title, subject, description, user_id) VALUES
-                ('{$this->getTitle()}',
-                 '{$this->getSubject()}',
-                 '{$this->getDescription()}',
+                ('{$temp_title}',
+                 '{$temp_subject}',
+                 '{$temp_description}',
                   {$this->getUserId()});
             ");
             $this->id = $GLOBALS['DB']->lastInsertId();
@@ -106,11 +111,17 @@
         //Edit course info
         function updateCourse($new_title, $new_subject, $new_description)
         {
+            //Handle apostrophes for MySQL statements first
+            $temp_new_title = str_replace(["'"], "''", $this->getTitle());
+            $temp_new_subject = str_replace(["'"], "''", $this->getSubject());
+            $temp_new_description = str_replace(["'"], "''", $this->getDescription());
+
             $GLOBALS['DB']->exec("UPDATE courses SET
-                    title       = '{$new_title}',
-                    subject     = '{$new_subject}',
-                    description = '{$new_description}'
+                    title       = '{$temp_new_title}',
+                    subject     = '{$temp_new_subject}',
+                    description = '{$temp_new_description}'
                 WHERE id = {$this->getId()};");
+
                 $this->setTitle($new_title);
                 $this->setSubject($new_subject);
                 $this->setDescription($new_description);

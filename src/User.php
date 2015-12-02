@@ -80,6 +80,7 @@
         //Save a user to the database
         function save()
         {
+            //Handle apostrophes for MySQL statements first
             $temp_name = str_replace(["'"], "''", $this->getName());
             $temp_pass = str_replace(["'"], "''", $this->getPassword());
 
@@ -126,6 +127,7 @@
         //Edit user's info
         function updateUser($new_name, $new_password, $new_email)
         {
+            //Handle apostrophes for MySQL statements first
             $temp_new_name = str_replace(["'"], "''", $new_name);
             $temp_new_pass = str_replace(["'"], "''", $new_password);
 
