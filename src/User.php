@@ -41,7 +41,9 @@
 
         function getHash()
         {
-            $query = $GLOBALS['DB']->query("SELECT password FROM users WHERE name = '{$this->getName()}';");
+            $temp_name = str_replace(["'"], "''", $this->getName());
+            
+            $query = $GLOBALS['DB']->query("SELECT password FROM users WHERE name = '{$temp_name}';");
             $pass = $query->fetch(PDO::FETCH_ASSOC);
             $hash = $pass['password'];
             return $hash;
@@ -78,8 +80,10 @@
         //Save a user to the database
         function save()
         {
+            $temp_name = str_replace(["'"], "''", $this->getName());
+
             $GLOBALS['DB']->exec("INSERT INTO users (name, password, email, signed_in) VALUES
-                ('{$this->getName()}',
+                ('{$temp_name}',
                  '{$this->getPassword()}',
                  '{$this->getEmail()}',
                   {$this->getSignedIn()});
