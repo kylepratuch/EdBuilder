@@ -41,7 +41,7 @@
 
                 <form action="/delete_course/{{ user.getId }}/{{ course.getId }}">
                     <!-- Edit link is inside form for formatting purposes -->
-                    <a class="btn btn-warning" href="/show_course_edit/{{ course.getId }}">Edit this course</a>
+                    <a class="btn btn-primary" href="/show_course_edit/{{ course.getId }}">Edit this course</a>
 
                     <input name="_method" type="hidden" value="delete">
                     <button type="submit" class="btn btn-danger">Delete This Course</button>
@@ -81,7 +81,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <button type="submit" class="btn btn-success btn-lg">+</button>
+                                <button type="submit" class="btn btn-primary btn-lg">+</button>
                             </div>
                         </div>
                     </fieldset>

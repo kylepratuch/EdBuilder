@@ -43,7 +43,7 @@
 
                 <form action="/delete_lesson/{{ unit.getId }}/{{ lesson.getId }}">
                     <!-- Edit link is inside form for formatting purposes -->
-                    <a class="btn btn-warning" href="/show_lesson_edit/{{ lesson.getId }}">Edit this lesson</a>
+                    <a class="btn btn-primary" href="/show_lesson_edit/{{ lesson.getId }}">Edit this lesson</a>
 
                     <input name="_method" type="hidden" value="delete">
                     <button type="submit" class="btn btn-danger">Delete this Lesson</button>
