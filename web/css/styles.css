@@ -1,3 +1,7 @@
+body {
+    background-color:#E8E8E8;
+}
+
 .well-shadow {
-    box-shadow: 3px 3px 5px #E8E8E8;
+    box-shadow: 3px 3px 5px #B0B0B0;
 }
