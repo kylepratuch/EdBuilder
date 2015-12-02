@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="../../css/bootstrap.css">
+        <link rel="stylesheet" href="../../css/styles.css">
         <title>EdBuilder</title>
     </head>
 
@@ -31,7 +32,7 @@
         <div class="container">
 
             <!-- Jumbo -->
-            <div class="jumbotron">
+            <div class="jumbotron well-shadow">
                 <h2>Welcome to your dashboard, {{ user.getName }}!</h2>
                 <p>Let's get to work! Select one of your existing courses, or create a brand new one.</p>
 
@@ -40,7 +41,7 @@
             <!-- End jumbo -->
 
             <!-- Courses list -->
-            <div class="well">
+            <div class="well well-shadow">
                 <h3>Your courses:</h3>
                 {% if courses is not empty %}
                     {% for course in courses %}
@@ -53,7 +54,7 @@
             <!-- End courses list -->
 
             <!-- Add course form -->
-            <div class="well">
+            <div class="well well-shadow">
                 <form class="form-horizontal" action="/add_course/{{user.getId}}" method="post">
                     <fieldset>
                         <div class="form-group">

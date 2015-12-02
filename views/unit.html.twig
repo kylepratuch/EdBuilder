@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="../../css/bootstrap.css">
+        <link rel="stylesheet" href="../../css/styles.css">
         <title>EdBuilder</title>
     </head>
     <body>
@@ -34,7 +35,7 @@
         <div class="container">
 
             <!-- Jumbo -->
-            <div class="jumbotron">
+            <div class="jumbotron well-shadow">
                 <p><strong>Unit Title:</strong> {{ unit.getTitle }}</p>
                 <p><strong>Description:</strong> {{ unit.getDescription }}</p>
 
@@ -50,7 +51,7 @@
             <!-- End Jumbo -->
 
             <!-- Lessons list -->
-            <div class="well">
+            <div class="well well-shadow">
                 <h3>Lessons in this unit:</h3>
                 {% if lessons is not empty %}
                     {% for lesson in lessons %}
@@ -63,7 +64,7 @@
             <!-- End lessons list -->
 
             <!-- Add lesson form -->
-            <div class="well">
+            <div class="well well-shadow">
                 <form class="form-horizontal" action="/add_lesson/{{ course.getId }}/{{unit.getId}}" method="post">
                     <fieldset>
                         <div class="form-group">

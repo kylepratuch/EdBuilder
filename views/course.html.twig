@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="../../css/bootstrap.css">
+        <link rel="stylesheet" href="../../css/styles.css">
         <title>EdBuilder</title>
     </head>
     <body>
@@ -33,7 +34,7 @@
 
         <div class="container">
             <!-- Jumbo -->
-            <div class="jumbotron">
+            <div class="jumbotron well-shadow">
                 <p><strong>Course Title:</strong> {{ course.getTitle }}</p>
                 <p><strong>Subject:</strong> {{ course.getSubject }}</p>
                 <p><strong>Description:</strong> {{ course.getDescription }}</p>
@@ -63,7 +64,7 @@
             <!-- End Units List -->
 
             <!-- Add unit form -->
-            <div class="well">
+            <div class="well well-shadow">
                 <form class="form-horizontal" action="/add_unit/{{ user.getId }}/{{course.getId}}" method="post">
                     <fieldset>
                         <div class="form-group">
