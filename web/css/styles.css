@@ -3,5 +3,6 @@ body {
 }
 
 .well-shadow {
+    border: 1px solid #D8D8D8;
     box-shadow: 3px 3px 5px #B0B0B0;
 }
