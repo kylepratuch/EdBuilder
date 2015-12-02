@@ -73,11 +73,17 @@
         //Save a lesson to the database
         function save()
         {
+            //Handle apostrophes before executing MySQL statements
+            $temp_title = str_replace(["'"], "''", $this->getTitle());
+            $temp_objective = str_replace(["'"], "''", $this->getObjective());
+            $temp_materials = str_replace(["'"], "''", $this->getMaterials());
+            $temp_body = str_replace(["'"], "''", $this->getBody());
+
             $GLOBALS['DB']->exec("INSERT INTO lessons (title, objective, materials, body, unit_id) VALUES
-                ('{$this->getTitle()}',
-                 '{$this->getObjective()}',
-                 '{$this->getMaterials()}',
-                 '{$this->getBody()}',
+                ('{$temp_title}',
+                 '{$temp_objective}',
+                 '{$temp_materials}',
+                 '{$temp_body}',
                   {$this->getUnitId()});
             ");
 
@@ -118,11 +124,17 @@
         //Update lesson
         function updateLesson($new_title, $new_objective, $new_materials, $new_body)
         {
+            //Handle apostorphes before executing MySQL statement
+            $temp_new_title = str_replace(["'"], "''", $new_title);
+            $temp_new_objective = str_replace(["'"], "''", $new_objective);
+            $temp_new_materials = str_replace(["'"], "''", $new_materials);
+            $temp_new_body = str_replace(["'"], "''", $new_body);
+
             $GLOBALS['DB']->exec("UPDATE lessons SET
-                    title       = '{$new_title}',
-                    objective   = '{$new_objective}',
-                    materials   = '{$new_materials}',
-                    body        = '{$new_body}'
+                    title       = '{$temp_new_title}',
+                    objective   = '{$temp_new_objective}',
+                    materials   = '{$temp_new_materials}',
+                    body        = '{$temp_new_body}'
                 WHERE id = {$this->getId()};");
                 $this->setTitle($new_title);
                 $this->setObjective($new_objective);

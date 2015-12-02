@@ -95,14 +95,14 @@
         //Edit unit info
         function updateUnit($new_title, $new_description)
         {
-            $temp_new_title = str_replace(["'"], "''", $this->getTitle());
-            $temp_new_description = str_replace(["'"], "''", $this->getDescription());
+            $temp_new_title = str_replace(["'"], "''", $new_title);
+            $temp_new_description = str_replace(["'"], "''", $new_description);
 
             $GLOBALS['DB']->exec("UPDATE units SET
                     title       = '{$temp_new_title}',
                     description = '{$temp_new_description}'
                 WHERE id = {$this->getId()};");
-                
+
                 $this->setTitle($new_title);
                 $this->setDescription($new_description);
         }
