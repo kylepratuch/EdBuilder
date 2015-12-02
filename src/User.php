@@ -42,7 +42,7 @@
         function getHash()
         {
             $temp_name = str_replace(["'"], "''", $this->getName());
-            
+
             $query = $GLOBALS['DB']->query("SELECT password FROM users WHERE name = '{$temp_name}';");
             $pass = $query->fetch(PDO::FETCH_ASSOC);
             $hash = $pass['password'];
@@ -81,10 +81,11 @@
         function save()
         {
             $temp_name = str_replace(["'"], "''", $this->getName());
+            $temp_pass = str_replace(["'"], "''", $this->getPassword());
 
             $GLOBALS['DB']->exec("INSERT INTO users (name, password, email, signed_in) VALUES
                 ('{$temp_name}',
-                 '{$this->getPassword()}',
+                 '{$temp_pass}',
                  '{$this->getEmail()}',
                   {$this->getSignedIn()});
             ");
@@ -125,9 +126,12 @@
         //Edit user's info
         function updateUser($new_name, $new_password, $new_email)
         {
+            $temp_new_name = str_replace(["'"], "''", $new_name);
+            $temp_new_pass = str_replace(["'"], "''", $new_password);
+
             $GLOBALS['DB']->exec("UPDATE users SET
-                    name        = '{$new_name}',
-                    password    = '{$new_password}',
+                    name        = '{$temp_new_name}',
+                    password    = '{$temp_new_pass}',
                     email       = '{$new_email}'
                 WHERE id = {$this->getId()};");
                 $this->setName($new_name);
