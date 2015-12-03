@@ -45,7 +45,7 @@
                 <h3>Your courses:</h3>
                 {% if courses is not empty %}
                     {% for course in courses %}
-                        <a class="btn btn-default btn-lg btn-block" href="/show_course/{{ course.getId }}">{{ course.getTitle }}</a>
+                        <a class="btn btn-default btn-lg btn-block list-blocks" href="/show_course/{{ course.getId }}">{{ course.getTitle }}</a>
                     {% endfor %}
                 {% else %}
                     <p>You don't have any courses yet!</p>

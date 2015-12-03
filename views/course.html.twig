@@ -55,7 +55,7 @@
                 <h3>Units in this course:</h3>
                 {% if units is not empty %}
                     {% for unit in units %}
-                        <a class="btn btn-default btn-lg btn-block" href="/show_unit/{{ unit.getId }}">{{ unit.getTitle }}</a>
+                        <a class="btn btn-default btn-lg btn-block list-blocks" href="/show_unit/{{ unit.getId }}">{{ unit.getTitle }}</a>
                     {% endfor %}
                 {% else %}
                     <p>You don't have any units yet!</p>

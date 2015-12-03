@@ -55,7 +55,7 @@
                 <h3>Lessons in this unit:</h3>
                 {% if lessons is not empty %}
                     {% for lesson in lessons %}
-                        <a class="btn btn-default btn-lg btn-block" href="/show_lesson/{{ lesson.getId }}">{{ lesson.getTitle }}</a>
+                        <a class="btn btn-default btn-lg btn-block list-blocks" href="/show_lesson/{{ lesson.getId }}">{{ lesson.getTitle }}</a>
                     {% endfor %}
                 {% else %}
                     <p>You don't have any lessons yet!</p>

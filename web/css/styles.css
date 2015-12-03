@@ -6,3 +6,13 @@ body {
     border: 1px solid #D8D8D8;
     box-shadow: 3px 3px 5px #B0B0B0;
 }
+
+.list-blocks {
+    background-color:#18D4B2;
+    color:white;
+}
+
+.list-blocks:hover {
+    background-color:#44827c;
+    color:white;
+}
