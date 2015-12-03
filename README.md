@@ -2,7 +2,7 @@
 
 ##### Streamlined curriculum design App, December 3, 2015
 
-#### By _**Kelli Sommerdyke, Casey Heitz, Jason Bethel, Kyle Pratuch, Jordan Johansen, and Sam Martinez**_
+#### By _**Kyle Pratuch**_
 
 ## Description
 
