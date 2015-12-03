@@ -18,7 +18,7 @@ Not necessarily in this order:
 
 * "Account at a glance" view from dashboard
 
-* Text text editing with markdown in lesson narratives
+* Text editing with markdown in lesson narratives
 
 ## Setup
 
