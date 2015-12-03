@@ -1,4 +1,4 @@
-# Beer_Me
+# EdBuilder
 
 ##### Streamlined curriculum design App, December 3, 2015
 
